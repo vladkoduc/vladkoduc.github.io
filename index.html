@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta name="theme-color" content="#000000">
+    <title>Telegram Web App</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        #app {
+            width: 100vw;
+            min-height: 100vh;
+            background-color: #000000;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .buttons-wrapper {
+            background-color: transparent;
+        }
+
+        .button-container {
+            -webkit-tap-highlight-color: transparent;
+            background-color: transparent;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 0;
+            cursor: pointer;
+            position: relative;
+            margin: 0 16px;
+            overflow: hidden;
+            transition: transform 0.5s ease; /* Добавляем плавную анимацию */
+        }
+
+        .slide-left {
+            transform: translateX(-100vw); /* Смещение кнопки за пределы экрана */
+        }
+
+        /* Ripple effect */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple-animation 0.3s linear;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        .button-container + .button-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 60px;
+            right: 0;
+            height: 1px;
+            background-color: #f1f1f1;
+        }
+
+        .button-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .button-container img {
+            width: 35px;
+            height: 35px;
+            margin: 0 12px;
+            z-index: 2;
+        }
+
+        .button-text {
+            font-family: 'Helvetica Neue bold', sans-serif;
+            font-size: 16px;
+            z-index: 2;
+        }
+
+        .button-arrow {
+            display: flex;
+            align-items: center;
+            margin-left: 12px;
+            z-index: 2;
+        }
+
+        .button-arrow img {
+            width: auto;
+            height: 21px;
+            z-index: 2;
+        }
+
+        .light-theme .button-arrow img {
+            filter: brightness(0) saturate(100%) invert(81%) sepia(0%) saturate(100%) hue-rotate(190deg) brightness(90%) contrast(90%);
+        }
+
+        .dark-theme .button-arrow img {
+            filter: brightness(0) saturate(100%) invert(35%) sepia(9%) saturate(144%) hue-rotate(175deg) brightness(85%) contrast(88%);
+        }
+
+        .button-container:hover {
+            background-color: #f7f7f780;
+        }
+
+        .dark-theme .button-container {
+            background-color: #17212bcc;
+            color: #ffffff;
+        }
+
+        .dark-theme .button-container + .button-container::before {
+            background-color: #232e3c;
+        }
+
+        .light-theme .button-container {
+            background-color: #ffffffcc;
+            color: #000000;
+        }
+
+        .light-theme .button-container + .button-container::before {
+            background-color: #f1f1f1;
+        }
+
+        @supports (-webkit-touch-callout: none) {
+            #faq-button {
+                border-radius: 12px 12px 0 0;
+            }
+
+            #support-button {
+                border-radius: 0 0 12px 12px;
+            }
+        }
+
+        #popup-text {
+            color: #000000;
+            font-size: 16px;
+            display: inline-block; /* Ensure the text occupies only the required space */
+            padding: 12px; /* Add padding around the text */
+            font-family: 'Roboto', sans-serif; /* Keep font family */
+            visibility: hidden; /* Initially hidden */
+            word-wrap: break-word; /* Allows text to wrap inside the popup if it's too long */
+        }
+
+        .dark-theme #popup-text {
+            color: white;
+        }
+
+        .show-popup #popup-text {
+            visibility: visible; /* Текст появляется, когда показывается прямоугольник */
+        }
+
+        #support-popup {
+            background-color: #ffffff; /* Background color of the popup */
+            border-radius: 12px; /* Rounded corners */
+            position: fixed;
+            top: 0px; /* Slightly lower the popup from the top */
+            left: 12px; /* Positioning from the left */
+            right: 12px;
+            padding: 0; /* Remove padding to allow dynamic resizing */
+            width: auto; /* Allow width to adjust based on content */
+            height: auto; /* Height adjusts based on content */
+            transform: translateX(100%);
+            animation: slide-in 0.5s ease forwards; /* Smooth slide-in animation */
+            z-index: 156;
+        }
+
+        #chat-popup {
+            background-color: #ffffff;
+            border-radius: 12px;
+            position: fixed;
+            top: 60px; /* Размещаем ниже первого popup */
+            left: 12px;
+            right: 12px;
+            padding: 0;
+            width: auto;
+            height: auto;
+            transform: translateX(100%);
+            animation: slide-in 0.5s ease forwards;
+            z-index: 155;
+        }
+
+        .show-popup #chat-popup {
+            display: block;
+            right: 16px;
+        }
+
+        .hidden-popup {
+            display: none;
+        }
+
+        #chat-text {
+            color: #000000;
+            -webkit-text-size-adjust: none;
+            font-size: 16px;
+            display: inline-block;
+            padding: 12px;
+            font-family: 'Roboto', sans-serif;
+            visibility: hidden;
+        }
+
+        .dark-theme #chat-text {
+            color: white;
+        }
+
+        .light-theme #chat-text {
+            color: black;
+        }
+
+        .show-popup #chat-text {
+            visibility: visible;
+        }
+
+        @keyframes slide-in {
+            from {
+                transform: translateX(100%); /* Начальное положение за экраном */
+            }
+            to {
+                transform: translateX(0); /* Конечное положение на своем месте */
+            }
+        }
+
+        .hidden-popup {
+            display: none; /* Скрыт по умолчанию */
+        }
+
+        .show-popup {
+            display: block;
+            right: 16px; /* Положение на экране при показе */
+        }
+
+        /* Добавим стиль для тени, который будет применяться только для не-Apple устройств */
+        .non-apple-support-shadow {
+            box-shadow: 0px 1px 2px #00000013;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="buttons-wrapper">
+            <div class="button-container" id="faq-button">
+                <div class="button-left">
+                    <img src="faq_png.png" alt="FAQ icon">
+                    <span class="button-text">FAQ</span>
+                </div>
+                <div class="button-arrow">
+                    <img src="arrow_web_app.png" alt="Arrow icon">
+                </div>
+            </div>
+            <div class="button-container" id="support-button">
+                <div class="button-left">
+                    <img src="support_png.png" alt="Support icon">
+                    <span class="button-text">Поддержка</span>
+                </div>
+                <div class="button-arrow">
+                    <img src="arrow_web_app.png" alt="Arrow icon">
+                </div>
+            </div>
+        </div>
+        <div id="support-popup" class="hidden-popup">
+            <span id="popup-text"><b>ЗАКРЫТЫЙ КАНАЛ | Ковчег</b></span>
+        </div>
+        <div id="chat-popup" class="hidden-popup">
+            <span id="chat-text">
+                Тут ты сможешь наконец-то:<br><br>
+                1. Правильно и быстро стать привлекательным (вся база знаний о ЛУКСМАКСИНГЕ и действительно рабочие методы)<br><br>
+                2. Убрать социальную ТРЕВОЖНОСТЬ и начать общаться с девушками без страха<br><br>
+                3. Обрести НАСТОЯЩУЮ НЕПОКОЛЕБИМУЮ УВЕРЕННОСТЬ В СЕБЕ<br><br>
+                + закрый чат с САМЫМИ СИЛЬНЫМИ
+            </span>
+        </div>
+    </div>
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+        const telegram = window.Telegram.WebApp;
+
+        function applyColors() {
+            const platform = navigator.userAgent.toLowerCase();
+            const theme = telegram.colorScheme;
+            document.body.className = theme === 'dark' ? 'dark-theme' : 'light-theme';
+
+            let backgroundColor;
+            let headerColor;
+            let isColorLight;
+            const supportPopup = document.getElementById('support-popup');
+            const chatPopup = document.getElementById('chat-popup');
+
+            if (platform.includes('iphone') || platform.includes('ipad') || platform.includes('mac')) {
+                // Для Apple устройств стили остаются прежними
+                supportPopup.style.left = '12px';
+                supportPopup.style.right = '12px';
+                supportPopup.style.borderRadius = '12px';
+                chatPopup.style.left = '12px';
+                chatPopup.style.right = '12px';
+                chatPopup.style.borderRadius = '12px';
+            } else {
+                // Для не-Apple устройств изменяем стили
+                supportPopup.style.left = '0';
+                supportPopup.style.right = ''; // Убираем правый отступ
+                supportPopup.style.width = '100%'; // Прямоугольник будет занимать всю ширину
+                supportPopup.style.borderRadius = '0px';
+                chatPopup.style.left = '0';
+                chatPopup.style.right = ''; // Убираем правый отступ
+                chatPopup.style.width = '100%'; // Прямоугольник будет занимать всю ширину
+                chatPopup.style.borderRadius = '0px';
+            }
+
+            // Проверка устройства и темы
+            if (theme === 'light') {
+                // Светлая тема на всех устройствах
+                supportPopup.style.backgroundColor = '#ffffff';
+            } else {
+                // Тёмная тема
+                if (platform.includes('iphone') || platform.includes('ipad') || platform.includes('mac')) {
+                    // Apple устройство
+                    chatPopup.style.backgroundColor = '#2c2c2e';
+                    supportPopup.style.backgroundColor = '#2c2c2e';
+                } else {
+                    // Другие устройства
+                    chatPopup.style.backgroundColor = '#17212b';
+                    supportPopup.style.backgroundColor = '#17212b';
+                }
+            }
+
+            if (platform.includes('iphone') || platform.includes('ipad') || platform.includes('mac')) {
+                backgroundColor = theme === 'dark' ? '#1c1c1e' : '#f1f1f1';
+                headerColor = backgroundColor;
+
+                if (theme === 'dark') {
+                    const style = document.createElement('style');
+                    style.innerHTML =
+                        '.button-container + .button-container::before { background-color: #323234 !important; }';
+                    document.head.appendChild(style);
+                }
+
+                const faqButton = document.getElementById('faq-button');
+                const supportButton = document.getElementById('support-button');
+
+                faqButton.style.backgroundColor = theme === 'dark' ? '#2c2c2e' : 'rgba(255, 255, 255, 0.8)';
+                supportButton.style.backgroundColor = theme === 'dark' ? '#2c2c2e' : 'rgba(255, 255, 255, 0.8)';
+            } else {
+                backgroundColor = theme === 'dark' ? '#232e3c' : '#f1f1f1';
+                headerColor = backgroundColor;
+
+                const buttonsText = document.querySelectorAll('.button-text');
+                buttonsText.forEach(button => {
+                    button.style.fontFamily = 'Roboto, sans-serif';
+                });
+
+                const buttonsContainer = document.querySelectorAll('.button-container');
+                buttonsContainer.forEach(button => {
+                    button.style.margin = '0';
+                });
+
+                const supportButton = document.getElementById('support-button');
+                const chatPopup = document.getElementById('chat-popup');
+                supportButton.classList.add('non-apple-support-shadow');
+                chatPopup.classList.add('non-apple-support-shadow');
+            }
+
+            isColorLight = theme !== 'dark';
+
+            telegram.setBackgroundColor(backgroundColor);
+            telegram.setHeaderColor(headerColor, isColorLight);
+
+            document.getElementById('app').style.backgroundColor = backgroundColor;
+
+            document.body.className = theme === 'dark' ? 'dark-theme' : 'light-theme';
+        }
+
+        telegram.onEvent('themeChanged', applyColors);
+        applyColors();
+
+        const member = "guest";
+        if (member === "guest" && !telegram.MainButton.isVisible) {
+            telegram.MainButton.setText("Приобрести подписку");
+            telegram.MainButton.hasShineEffect = true;
+            telegram.MainButton.show();
+        }
+
+        telegram.MainButton.onClick(() => {
+            window.location.href = 'https://t.me/tribute/app?startapp=sf1n';
+        });
+
+        telegram.ready();
+
+        const faqButton = document.getElementById('faq-button');
+        faqButton.addEventListener('click', () => {
+            window.open('https://telegram.org/blog/gifts-verification-platform/ru?ln=a', '_blank');
+        });
+
+        // Логика для смещения кнопок влево
+        const supportButton = document.getElementById('support-button');
+        supportButton.addEventListener('click', () => {
+            const buttons = document.querySelectorAll('.button-container');
+            buttons.forEach(button => {
+                button.classList.add('slide-left'); // Добавляем класс с анимацией
+            });
+        });
+
+        supportButton.addEventListener('click', () => {
+            const supportPopup = document.getElementById('support-popup');
+            supportPopup.classList.toggle('show-popup'); // Переключаем класс для отображения прямоугольника
+
+            const popupText = document.getElementById('popup-text');
+            popupText.style.visibility = supportPopup.classList.contains('show-popup') ? 'visible' : 'hidden';
+        });
+
+        const chatPopup = document.getElementById('chat-popup');
+        const chatText = document.getElementById('chat-text');
+
+        supportButton.addEventListener('click', () => {
+            chatPopup.classList.toggle('show-popup');
+            chatText.style.visibility = chatPopup.classList.contains('show-popup') ? 'visible' : 'hidden';
+        });
+
+        // Ripple эффект с изменением цвета в зависимости от темы и устройства
+        document.querySelectorAll('.button-container').forEach(button => {
+            button.addEventListener('click', function (e) {
+                const ripple = document.createElement('span');
+                const buttonRect = button.getBoundingClientRect();
+                const size = Math.max(buttonRect.width, buttonRect.height);
+                const x = e.clientX - buttonRect.left - size / 2;
+                const y = e.clientY - buttonRect.top - size / 2;
+
+                const platform = navigator.userAgent.toLowerCase();
+                const theme = telegram.colorScheme;
+
+                let rippleColor;
+                if (platform.includes('iphone') || platform.includes('ipad') || platform.includes('mac')) {
+                    rippleColor = theme === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.1)';
+                } else {
+                    rippleColor = theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)';
+                }
+
+                ripple.style.width = ripple.style.height = `${size}px`;
+                ripple.style.left = `${x}px`;
+                ripple.style.top = `${y}px`;
+                ripple.style.background = rippleColor;
+
+                ripple.classList.add('ripple');
+                button.appendChild(ripple);
+
+                ripple.addEventListener('animationend', () => {
+                    ripple.remove();
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
