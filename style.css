@@ -1,0 +1,28 @@
+:root {
+  --tg-dark-bg-color: #1e1e1e;
+  --tg-dark-text-color: #ffffff;
+  --tg-light-bg-color: #e0e0e0; /* Темнее, чем оригинальный светлый */
+  --tg-light-text-color: #000000;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Helvetica Neue', sans-serif;
+  background-color: var(--tg-theme-bg-color, #ffffff); /* Значение по умолчанию */
+  color: var(--tg-theme-text-color, #000000);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.content {
+  padding: 20px;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 16px;
+}
