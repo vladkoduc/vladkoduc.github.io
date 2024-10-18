@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Telegram Mini App</title>
+  <style>
+    body {
+      background-color: var(--tg-theme-bg-color);
+      transition: background-color 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+  <h1>Главная страница</h1>
+
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script>
+    // Функция для изменения фона и заголовка Telegram в зависимости от условий
+    function updateBackgroundColor() {
+      const bgColor = getComputedStyle(document.body).getPropertyValue('--tg-theme-bg-color').trim();
+      const headerBgColor = getComputedStyle(document.documentElement).getPropertyValue('--tg-theme-header-bg-color').trim();
+
+      // Определяем устройство
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+      const isAndroid = /Android/.test(navigator.userAgent);
+      const isMacOS = /Macintosh|Mac OS X/.test(navigator.userAgent);
+      const isWindows = /Windows/.test(navigator.userAgent);
+      const isLinux = /Linux/.test(navigator.userAgent);
+
+      // Логика для фона страницы
+      if (bgColor === '#000000') {
+        if (isIOS) {
+          document.body.style.backgroundColor = '#1c1c1c';
+        } else if (isMacOS) {
+          document.body.style.backgroundColor = '#131416';
+        }
+      } else if (bgColor === '#ffffff') {
+        document.body.style.backgroundColor = '#efeef4';
+      } else if (bgColor === '#1d2733') {
+        if (isAndroid) {
+          document.body.style.backgroundColor = '#151e27';
+        } else if (isWindows || isLinux) {
+          document.body.style.backgroundColor = '#232e3c';
+        }
+      } else if (bgColor === '#17212b') {
+        if (isWindows || isLinux) {
+          document.body.style.backgroundColor = '#232e3c';
+        }
+      }
+
+      // Логика для изменения цвета заголовка Telegram
+      if (isIOS) {
+        if (headerBgColor === '#000000') {
+          document.documentElement.style.setProperty('--tg-theme-header-bg-color', '#1c1c1c');
+        } else if (headerBgColor === '#ffffff') {
+          document.documentElement.style.setProperty('--tg-theme-header-bg-color', '#efeef4');
+        }
+      }
+      // Для других устройств цвет заголовка не изменяется
+    }
+
+    // Вызов функции при загрузке страницы
+    window.Telegram.WebApp.ready(() => {
+      updateBackgroundColor();
+    });
+
+    // Обновление фона при изменении параметров темы
+    window.Telegram.WebApp.onEvent('themeChanged', updateBackgroundColor);
+  </script>
+</body>
+</html>
