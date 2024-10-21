@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Telegram Mini App</title>
+  <style>
+    body {
+      background-color: var(--tg-theme-secondary-bg-color);
+      color: var(--tg-theme-text-color);
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .content {
+      padding: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<div class="content">
+  <h1>Привет, это мини-приложение!</h1>
+  <p>Текст и фон будут автоматически подстраиваться под тему Telegram.</p>
+</div>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script>
+  Telegram.WebApp.ready(); // Инициализация Web App
+
+  // Настройка цвета заголовка (верхнего бара)
+  Telegram.WebApp.setHeaderColor('secondary_bg'); // Использует var(--tg-theme-secondary-bg-color)
+
+  // Настройка цвета нижней панели (bottom sheet)
+  Telegram.WebApp.setBackgroundColor('secondary_bg'); // Использует var(--tg-theme-secondary-bg-color)
+
+
+</script>
+
+</body>
+</html>
