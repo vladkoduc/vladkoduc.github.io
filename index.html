@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <title>Content</title>
+    <link rel="stylesheet" href="styles_text.css"> 
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--tg-theme-secondary-bg-color); 
+        }
+
+        .not-subscribed {
+            position: absolute;
+            top: 10px;
+            left: 16px;
+            font-weight: bold;
+            font-size: 22px;
+            color: var(--tg-theme-text-color); 
+        }
+    </style>
+</head>
+<body>
+    <div class="not-subscribed">Не подписан FAQ</div>
+
+    <script>
+        Telegram.WebApp.ready();
+        Telegram.WebApp.expand();
+        function isMobile() {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|Windows Phone|Opera Mini|IEMobile|WPDesktop|Samsung|Nokia|Xiaomi|OnePlus|Huawei|Sony|Motorola|Oppo|Vivo|LG|HTC|Realme|Google|Pixel/i.test(userAgent);
+        }
+        if (isMobile()) {
+            const headerColor = getComputedStyle(document.documentElement).getPropertyValue('--tg-theme-secondary-bg-color');
+            Telegram.WebApp.setHeaderColor(headerColor);
+            Telegram.WebApp.setBackgroundColor(headerColor);
+        }
+        Telegram.WebApp.MainButton.setText("Приобрести подписку");
+        Telegram.WebApp.MainButton.hasShineEffect = true;
+        Telegram.WebApp.MainButton.show();
+        Telegram.WebApp.MainButton.onClick(() => {
+            window.location.href = 'https://t.me/tribute/app?startapp=sf1n';
+        });
+    </script>
+</body>
+</html>
