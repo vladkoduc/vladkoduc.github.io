@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Синий Прямоугольник с Эффектом Переливания</title>
+    <style>
+        .rectangle4 {
+            display: flex;
+            align-items: center; /* Центрируем элементы вертикально */
+            justify-content: space-between; /* Разделяем элементы по краям */
+        }
+
+        /* Контейнер для текста */
+        .text-container {
+            display: flex;
+            align-items: center; /* Центрируем текст по вертикали */
+            margin-right: auto; /* Делаем этот блок "прилипшим" к левому краю */
+        }
+
+        .info-icon-wrapper {
+            display: flex; /* Располагаем text-dop-info и icon2_4 в одной строке */
+            align-items: center; /* Центрируем их вертикально */
+            gap: 5px; /* Добавляем отступ в 5px между text-dop-info и icon2_4 */
+        }
+
+        .text-dop-info {
+            margin: 0; /* Убираем лишние отступы */
+        }
+
+        .icon2_4 {
+            margin: 0; /* Убираем лишние отступы */
+        }
+    </style>
+</head>
+<body>
+    <section class="_Profile_button_2_3">
+        <a class="rectangle4" onclick="navigateToPage('dop-info-profile-3.html')">
+            <svg class="icon1_4" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#ffcc00" d="M0 11.2C0 7.27963 0 5.31945 0.762954 3.82207C1.43407 2.50493 2.50493 1.43407 3.82207 0.762954C5.31945 0 7.27963 0 11.2 0H18.8C22.7204 0 24.6805 0 26.1779 0.762954C27.4951 1.43407 28.5659 2.50493 29.237 3.82207C30 5.31945 30 7.27963 30 11.2V18.8C30 22.7204 30 24.6805 29.237 26.1779C28.5659 27.4951 27.4951 28.5659 26.1779 29.237C24.6805 30 22.7204 30 18.8 30H11.2C7.27963 30 5.31945 30 3.82207 29.237C2.50493 28.5659 1.43407 27.4951 0.762954 26.1779C0 24.6805 0 22.7204 0 18.8V11.2Z"/>
+                <path fill="#fff" d="M16.67 20.699c-.19.051-.506.051-1.138.051h-1.065c-.631 0-.947 0-1.138-.051-.133-.036-.195-.051-.25-.077-.057-.026-.108-.063-.222-.143-.161-.113-.534-.556-1.28-1.443a19 19 0 0 0-.963-1.03C9.375 16.746 8 15.346 8 13c0-4 1.5-7.75 7-7.75S22 9 22 13c0 2.345-1.375 3.745-2.614 5.006-.342.348-.674.686-.963 1.03-.746.887-1.119 1.33-1.28 1.443-.114.08-.165.117-.221.143s-.118.041-.251.077zM12.5 22.75a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1 2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2"/>
+              </svg>                          
+            <!-- Контейнер для текста, чтобы он располагался слева -->
+            <div class="text-container">
+                <div class="text4">Личная консультация</div>
+            </div>
+            <!-- Контейнер с иконкой и дополнительным текстом, который будет располагаться справа -->
+            <div class="info-icon-wrapper">
+                <div class="text-dop-info">0</div>
+                <svg class="icon2_4" width="7" height="12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 5 5-5 5"></path>
+                </svg>
+            </div>
+        </a>
+    </section>
+</body>
+</html>
