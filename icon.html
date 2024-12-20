@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shine Effect</title>
+  <style>
+    /* Общие стили */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+.avatar-image {
+  position: relative;
+  width: 150px; /* Ширина изображения */
+  height: 150px; /* Высота изображения */
+  border-radius: 50%; /* Круглая форма */
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Для эстетики */
+}
+
+/* Псевдоэлемент для блика */
+.avatar-image::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%; /* Начальная позиция за пределами */
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-30deg); /* Наклон для блеска */
+  animation: shine 2s infinite; /* Анимация */
+}
+
+/* Анимация блика */
+@keyframes shine {
+  0% {
+    left: -150%;
+  }
+  50% {
+    left: 50%;
+  }
+  100% {
+    left: 150%;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <img src="avatarka-kovheg.jpg" alt="Аватарка" class="avatar-image" />
+</body>
+</html>

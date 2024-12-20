@@ -1,0 +1,8 @@
+.subscription-approved {
+    color: var(--tg-theme-section-header-text-color);
+    font-weight: 300;
+    text-align: left;
+    margin-left: 16px;
+    margin-bottom: 8px;
+    font-size: 13px;
+}
