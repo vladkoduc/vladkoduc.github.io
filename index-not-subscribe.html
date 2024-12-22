@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">  
+<head>      
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <title>Not subscribe</title>
+    <script src="discovery-logic-mini-app.js"></script>
+    <script src="logic-lowmn-fixed-base.js"></script>
+    <script src="logic-style-bottom-top-background.js"></script>
+    <script src="logic-username.js"></script>
+    <script src="logic-device.js"></script>
+    <script src="click.js"></script>
+    <script src="index.js"></script>
+    <link rel="stylesheet" href="not-button-style-up.css"> 
+    <link rel="stylesheet" href="styles_text.css"> 
+    <link rel="stylesheet" href="text-bar-not-button.css"> 
+    <link rel="stylesheet" href="mini-text.css"> 
+    <link rel="stylesheet" href="condition-btn-size-all.css"> 
+    <link rel="stylesheet" href="bar_menu_button_style.css">  
+    <style> 
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--tg-theme-secondary-bg-color); 
+            color: var(--tg-theme-text-color);
+            display: flex;
+            flex-direction: column;
+            height: 100vh; 
+            overflow: hidden; 
+            user-select: none; 
+            -webkit-user-select: none; 
+            -ms-user-select: none; 
+            padding-bottom: 56px; 
+        }
+        ::-webkit-scrollbar {
+            display: none; 
+        }
+        * {
+            pointer-events: auto; 
+        }
+        img, a, input, textarea {
+            pointer-events: auto; 
+        }
+        .content {
+            margin-top: 0px;
+            flex: 1; 
+            overflow-y: auto; 
+        }
+        .text-blue {
+            color: var(--tg-theme-link-color);
+        }
+        .non-apple .bottom-menu {
+            background-color: var(--tg-theme-section-bg-color); 
+            padding: 10px; 
+            display: flex;
+            justify-content: center; 
+            position: relative; 
+        }
+        .apple .bottom-menu {
+            background-color: var(--tg-theme-bottom-bar-bg-color); 
+            padding: 10px; 
+            display: flex;
+            justify-content: center; 
+            position: relative; 
+        }
+        .non-apple .bottom-menu::before {
+            content: '';
+            position: absolute;
+            top: 0; 
+            left: 0;
+            right: 0;
+            height: 0.5px; 
+            background-color: var(--tg-theme-hint-color); 
+            opacity: .2;
+            z-index: 1; 
+        }
+        .apple .bottom-menu::before {
+            content: '';
+            position: absolute;
+            top: 0; 
+            left: 0;
+            right: 0;
+            height: 0.5px; 
+            background-color: var(--tg-theme-hint-color); 
+            opacity: .1;
+            z-index: 1; 
+        }
+        ._Profile_bar_menu_button_profile_1_3 span {
+            color: var(--tg-theme-link-color);
+        }
+        ._Profile_bar_menu_button_profile_2_3 span {
+            color: var(--tg-theme-hint-color);
+        }
+        ._Profile_bar_menu_button_profile_3_3 span {
+            color: var(--tg-theme-hint-color);
+        }
+        ._Profile_button_2_3,
+        ._Profile_bar_menu_1,
+        ._Profile_bar_menu_2,
+        ._Profile_bar_menu_3 {
+            text-decoration: none; 
+            cursor: default; 
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+        .shine {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%);
+            animation: shine 3s infinite;
+        }
+        @keyframes shine {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <section class="_Profile_container_1">
+            <div class="_Profile_bar-not_button_1">Ковчег</div>
+                <section class="_Profile_not-button_1_1_up">
+                    <div class="rectangle">
+                        <svg class="icon1" fill="#fff" width="30px" height="30px" viewBox="0 0 30 30" id="icon" xmlns="http://www.w3.org/2000/svg">
+                            <path fill="#ff2351" d="M0 11.2C0 7.27963 0 5.31945 0.762954 3.82207C1.43407 2.50493 2.50493 1.43407 3.82207 0.762954C5.31945 0 7.27963 0 11.2 0H18.8C22.7204 0 24.6805 0 26.1779 0.762954C27.4951 1.43407 28.5659 2.50493 29.237 3.82207C30 5.31945 30 7.27963 30 11.2V18.8C30 22.7204 30 24.6805 29.237 26.1779C28.5659 27.4951 27.4951 28.5659 26.1779 29.237C24.6805 30 22.7204 30 18.8 30H11.2C7.27963 30 5.31945 30 3.82207 29.237C2.50493 28.5659 1.43407 27.4951 0.762954 26.1779C0 24.6805 0 22.7204 0 18.8V11.2Z"/>
+                            <path transform="translate(-3.3, -0.3) scale(0.9)" fill-rule="evenodd" clip-rule="evenodd" d="M33.4 17C33.4 24.1797 27.5797 30 20.4 30C13.2203 30 7.39996 24.1797 7.39996 17C7.39996 9.8203 13.2203 4 20.4 4C27.5797 4 33.4 9.8203 33.4 17ZM24.4 14C24.4 16.2091 22.6091 18 20.4 18C18.1908 18 16.4 16.2091 16.4 14C16.4 11.7909 18.1908 10 20.4 10C22.6091 10 24.4 11.7909 24.4 14ZM27.9695 23.9231C27.7936 23.5007 27.5313 23.3274 27.0069 22.9809C25.112 21.7289 22.8412 21 20.4001 21C17.9589 21 15.688 21.7289 13.7932 22.981C13.2687 23.3276 13.0065 23.5008 12.8305 23.9232C12.7084 24.2163 12.7084 24.7839 12.8305 25.0769C13.0065 25.4993 13.2687 25.6726 13.7932 26.0191C15.688 27.2711 17.9589 28 20.4 28C22.8411 28 25.112 27.2711 27.0069 26.019C27.5314 25.6724 27.7936 25.4992 27.9695 25.0768C28.0916 24.7838 28.0916 24.2161 27.9695 23.9231Z" fill="#fff"></path>
+                        </svg>                        
+                        <div class="username-text" id="username">Загрузка...</div> 
+                    </div>
+                </section>
+            <div class="subscription-approved">Вам недоступна подписка на приватный Telegram канал - <span class="text-blue">Ковчег</span>.</div>
+        </section>
+        <section class="_Profile_container_2">
+            <div class="_Profile_bar-not_button_2">Актуальное</div>
+                <section class="_Profile_button_2_3_all">
+                    <section class="_Profile_button_2_1">
+                        <div class="rectangle2" onclick="navigateToPage('dop-info-profile-1.html')">
+                            <svg class="icon1_2" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill="#3ca5d6" d="M0 11.2C0 7.27963 0 5.31945 0.762954 3.82207C1.43407 2.50493 2.50493 1.43407 3.82207 0.762954C5.31945 0 7.27963 0 11.2 0H18.8C22.7204 0 24.6805 0 26.1779 0.762954C27.4951 1.43407 28.5659 2.50493 29.237 3.82207C30 5.31945 30 7.27963 30 11.2V18.8C30 22.7204 30 24.6805 29.237 26.1779C28.5659 27.4951 27.4951 28.5659 26.1779 29.237C24.6805 30 22.7204 30 18.8 30H11.2C7.27963 30 5.31945 30 3.82207 29.237C2.50493 28.5659 1.43407 27.4951 0.762954 26.1779C0 24.6805 0 22.7204 0 18.8V11.2Z"/>
+                                <path transform="translate(3, 4)" fill="#fff" d="M14,17.5 C14.8284,17.5 15.5,18.1716 15.5,19 C15.5,19.7796706 14.9050879,20.4204457 14.1444558,20.4931332 L14,20.5 L4,20.5 C3.17157,20.5 2.5,19.8284 2.5,19 C2.5,18.2203294 3.09488554,17.5795543 3.85553954,17.5068668 L4,17.5 L14,17.5 Z M20,12.5 C20.8284,12.5 21.5,13.1716 21.5,14 C21.5,14.8284 20.8284,15.5 20,15.5 L4,15.5 C3.17157,15.5 2.5,14.8284 2.5,14 C2.5,13.1716 3.17157,12.5 4,12.5 L20,12.5 Z M14,7.5 C14.8284,7.5 15.5,8.17157 15.5,9 C15.5,9.77969882 14.9050879,10.420449 14.1444558,10.4931335 L14,10.5 L4,10.5 C3.17157,10.5 2.5,9.82843 2.5,9 C2.5,8.22030118 3.09488554,7.579551 3.85553954,7.50686655 L4,7.5 L14,7.5 Z M20,2.5 C20.8284,2.5 21.5,3.17157 21.5,4 C21.5,4.77969882 20.9050879,5.420449 20.1444558,5.49313345 L20,5.5 L4,5.5 C3.17157,5.5 2.5,4.82843 2.5,4 C2.5,3.22030118 3.09488554,2.579551 3.85553954,2.50686655 L4,2.5 L20,2.5 Z"/>
+                            </svg>
+                            <div class="text2">Что будет в приватном канале?</div>
+                            <svg class="icon2_2" width="7" height="12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 5 5-5 5"></path>
+                            </svg>
+                        </div>
+                    </section>
+                    <section class="_Profile_button_2_2">
+                        <div class="rectangle3">
+                            <svg class="icon1_3" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill="#af52de" d="M0 11.2C0 7.27963 0 5.31945 0.762954 3.82207C1.43407 2.50493 2.50493 1.43407 3.82207 0.762954C5.31945 0 7.27963 0 11.2 0H18.8C22.7204 0 24.6805 0 26.1779 0.762954C27.4951 1.43407 28.5659 2.50493 29.237 3.82207C30 5.31945 30 7.27963 30 11.2V18.8C30 22.7204 30 24.6805 29.237 26.1779C28.5659 27.4951 27.4951 28.5659 26.1779 29.237C24.6805 30 22.7204 30 18.8 30H11.2C7.27963 30 5.31945 30 3.82207 29.237C2.50493 28.5659 1.43407 27.4951 0.762954 26.1779C0 24.6805 0 22.7204 0 18.8V11.2Z"/>
+                                <path d="M5.52.359A.5.5 0 0 1 6 0h4a.5.5 0 0 1 .474.658L8.694 6H12.5a.5.5 0 0 1 .395.807l-7 9a.5.5 0 0 1-.873-.454L6.823 9.5H3.5a.5.5 0 0 1-.48-.641l2.5-8.5z" transform="translate(7, 7)" fill="#fff"/>
+                            </svg> 
+                            <div class="text3">Кейсы</div>
+                            <svg class="icon2_3" width="7" height="12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 5 5-5 5"></path>
+                            </svg>
+                        </div>
+                    </section>
+                    <section class="_Profile_button_2_3">
+                        <a class="rectangle4" onclick="navigateToPage('dop-info-profile-3.html')">
+                            <svg class="icon1_4" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill="#ffcc00" d="M0 11.2C0 7.27963 0 5.31945 0.762954 3.82207C1.43407 2.50493 2.50493 1.43407 3.82207 0.762954C5.31945 0 7.27963 0 11.2 0H18.8C22.7204 0 24.6805 0 26.1779 0.762954C27.4951 1.43407 28.5659 2.50493 29.237 3.82207C30 5.31945 30 7.27963 30 11.2V18.8C30 22.7204 30 24.6805 29.237 26.1779C28.5659 27.4951 27.4951 28.5659 26.1779 29.237C24.6805 30 22.7204 30 18.8 30H11.2C7.27963 30 5.31945 30 3.82207 29.237C2.50493 28.5659 1.43407 27.4951 0.762954 26.1779C0 24.6805 0 22.7204 0 18.8V11.2Z"/>
+                                <path fill="#fff" d="M16.67 20.699c-.19.051-.506.051-1.138.051h-1.065c-.631 0-.947 0-1.138-.051-.133-.036-.195-.051-.25-.077-.057-.026-.108-.063-.222-.143-.161-.113-.534-.556-1.28-1.443a19 19 0 0 0-.963-1.03C9.375 16.746 8 15.346 8 13c0-4 1.5-7.75 7-7.75S22 9 22 13c0 2.345-1.375 3.745-2.614 5.006-.342.348-.674.686-.963 1.03-.746.887-1.119 1.33-1.28 1.443-.114.08-.165.117-.221.143s-.118.041-.251.077zM12.5 22.75a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1 2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2"/>
+                              </svg>                          
+                            <!-- Контейнер для текста, чтобы он располагался слева -->
+                            <div class="text-container">
+                                <div class="text4">Личная консультация</div>
+                            </div>
+                            <!-- Контейнер с иконкой и дополнительным текстом, который будет располагаться справа -->
+                            <div class="info-icon-wrapper">
+                                <div class="text-dop-info">0</div>
+                                <svg class="icon2_4" width="7" height="12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 5 5-5 5"></path>
+                                </svg>
+                            </div>
+                        </a>
+                    </section>
+                </section>
+        </section>
+        <section class="_Profile_container_3">
+            <section class="_Profile_button_3_2_all">
+                <section class="_Profile_button_3_1">
+                    <div class="rectangle5" id="rectangle5">
+                        <svg class="icon1_5" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill="#fb3d26" d="M0 11.2C0 7.27963 0 5.31945 0.762954 3.82207C1.43407 2.50493 2.50493 1.43407 3.82207 0.762954C5.31945 0 7.27963 0 11.2 0H18.8C22.7204 0 24.6805 0 26.1779 0.762954C27.4951 1.43407 28.5659 2.50493 29.237 3.82207C30 5.31945 30 7.27963 30 11.2V18.8C30 22.7204 30 24.6805 29.237 26.1779C28.5659 27.4951 27.4951 28.5659 26.1779 29.237C24.6805 30 22.7204 30 18.8 30H11.2C7.27963 30 5.31945 30 3.82207 29.237C2.50493 28.5659 1.43407 27.4951 0.762954 26.1779C0 24.6805 0 22.7204 0 18.8V11.2Z"/>
+                            <g transform="translate(3, 3)">
+                                <path d="M14.2172 3.49965C12.7962 2.83345 11.2037 2.83345 9.78272 3.49965L3.0916 6.63659C2.0156 7.14105 1.73507 8.56352 2.25 9.54666L2.25 14.5C2.25 14.9142 2.58579 15.25 3 15.25C3.41421 15.25 3.75 14.9142 3.75 14.5V10.672L9.78281 13.5003C11.2038 14.1665 12.7963 14.1665 14.2173 13.5003L20.9084 10.3634C22.3639 9.68105 22.3639 7.31899 20.9084 6.63664L14.2172 3.49965Z" fill="#fff"/>
+                                <path d="M5 12.9147V16.6254C5 17.6334 5.5035 18.5772 6.38533 19.0656C7.8537 19.8787 10.204 21 12 21C13.796 21 16.1463 19.8787 17.6147 19.0656C18.4965 18.5772 19 17.6334 19 16.6254V12.9148L14.854 14.8585C13.0296 15.7138 10.9705 15.7138 9.14607 14.8585L5 12.9147Z" fill="#fff"/>
+                            </g>
+                        </svg>     
+                        <div class="text4">Личный аккаунт Влада</div>
+                        <svg class="icon2_5" width="7" height="12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 5 5-5 5"></path>
+                        </svg>
+                    </div>
+                </section>
+                <section class="_Settings_button_1_2">
+                    <div class="rectangle3">
+                        <svg class="icon1_3" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill="#FF9500" d="M0 11.2C0 7.27963 0 5.31945 0.762954 3.82207C1.43407 2.50493 2.50493 1.43407 3.82207 0.762954C5.31945 0 7.27963 0 11.2 0H18.8C22.7204 0 24.6805 0 26.1779 0.762954C27.4951 1.43407 28.5659 2.50493 29.237 3.82207C30 5.31945 30 7.27963 30 11.2V18.8C30 22.7204 30 24.6805 29.237 26.1779C28.5659 27.4951 27.4951 28.5659 26.1779 29.237C24.6805 30 22.7204 30 18.8 30H11.2C7.27963 30 5.31945 30 3.82207 29.237C2.50493 28.5659 1.43407 27.4951 0.762954 26.1779C0 24.6805 0 22.7204 0 18.8V11.2Z"/>        
+                            <path transform="translate(0, -0.5)" fill-rule="evenodd" clip-rule="evenodd" d="M15 5.37988C20.5228 5.37988 25 9.45002 25 14.4708C25 19.4916 20.5228 23.5617 15 23.5617C14.1533 23.5617 13.3311 23.466 12.5459 23.2859C12.3974 23.2519 12.2287 23.4076 11.9472 23.6677C11.6067 23.9822 11.1011 24.4492 10.2663 24.9174C9.19977 25.5155 7.72206 25.4636 7.47197 25.3587C7.2322 25.2581 7.41675 25.0582 7.74176 24.7062C7.96661 24.4626 8.25868 24.1462 8.52398 23.7395C9.17277 22.745 8.90469 21.5609 8.61362 21.3478C6.33757 19.6815 5 17.3343 5 14.4708C5 9.45002 9.47715 5.37988 15 5.37988ZM10 15.9999C10.8284 15.9999 11.5 15.3283 11.5 14.4999C11.5 13.6715 10.8284 12.9999 10 12.9999C9.17157 12.9999 8.5 13.6715 8.5 14.4999C8.5 15.3283 9.17157 15.9999 10 15.9999ZM15 15.9999C15.8284 15.9999 16.5 15.3283 16.5 14.4999C16.5 13.6715 15.8284 12.9999 15 12.9999C14.1716 12.9999 13.5 13.6715 13.5 14.4999C13.5 15.3283 14.1716 15.9999 15 15.9999ZM21.5 14.4999C21.5 15.3283 20.8284 15.9999 20 15.9999C19.1716 15.9999 18.5 15.3283 18.5 14.4999C18.5 13.6715 19.1716 12.9999 20 12.9999C20.8284 12.9999 21.5 13.6715 21.5 14.4999Z" fill="#fff"></path>
+                        </svg>
+                        <div class="text3">Поддержка</div>
+                        <svg class="icon2_3" width="7" height="12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 5 5-5 5"></path>
+                        </svg>
+                    </div>
+                </section>
+                <section class="_Settings_button_1_3">
+                    <a class="rectangle4">
+                        <svg class="icon1_4" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill="#30b0c7" d="M0 11.2C0 7.27963 0 5.31945 0.762954 3.82207C1.43407 2.50493 2.50493 1.43407 3.82207 0.762954C5.31945 0 7.27963 0 11.2 0H18.8C22.7204 0 24.6805 0 26.1779 0.762954C27.4951 1.43407 28.5659 2.50493 29.237 3.82207C30 5.31945 30 7.27963 30 11.2V18.8C30 22.7204 30 24.6805 29.237 26.1779C28.5659 27.4951 27.4951 28.5659 26.1779 29.237C24.6805 30 22.7204 30 18.8 30H11.2C7.27963 30 5.31945 30 3.82207 29.237C2.50493 28.5659 1.43407 27.4951 0.762954 26.1779C0 24.6805 0 22.7204 0 18.8V11.2Z"/>        
+                            <path fill="#fff" d="M14.625 19.1147C14.2246 19.1147 13.9143 18.998 13.6941 18.7644C13.4806 18.5242 13.3738 18.2139 13.3738 17.8335C13.3738 17.7401 13.3738 17.65 13.3738 17.5632C13.3738 17.4765 13.3738 17.3864 13.3738 17.293C13.3738 16.7324 13.4839 16.2286 13.7041 15.7815C13.9243 15.3344 14.2313 14.924 14.625 14.5503C15.0187 14.1699 15.4692 13.8096 15.9763 13.4692C16.4301 13.1556 16.8205 12.8553 17.1475 12.5684C17.4744 12.2814 17.7247 11.9678 17.8982 11.6274C18.0717 11.2871 18.1584 10.8901 18.1584 10.4363C18.1584 9.9091 18.015 9.44865 17.728 9.05493C17.4478 8.66121 17.0707 8.36092 16.5969 8.15405C16.1231 7.94051 15.5859 7.83374 14.9854 7.83374C14.4982 7.83374 14.0478 7.91382 13.634 8.07397C13.227 8.22746 12.8733 8.4777 12.573 8.82471C12.2794 9.17171 12.0492 9.62882 11.8823 10.196C11.7889 10.4696 11.6354 10.6865 11.4219 10.8467C11.215 11.0002 10.9614 11.0769 10.6611 11.0769C10.2941 11.0769 10.0072 10.9701 9.80029 10.7566C9.6001 10.5364 9.5 10.2528 9.5 9.90576C9.5 9.69889 9.52336 9.48201 9.57007 9.25513C9.62345 9.02157 9.70687 8.78467 9.82031 8.54443C10.1073 7.9305 10.511 7.40332 11.0315 6.96289C11.5587 6.52246 12.1659 6.18547 12.8533 5.9519C13.5473 5.71834 14.2947 5.60156 15.0955 5.60156C16.1632 5.60156 17.1274 5.79508 17.9883 6.18213C18.8491 6.5625 19.5298 7.11304 20.0303 7.83374C20.5374 8.54777 20.791 9.41195 20.791 10.4263C20.791 11.3872 20.5408 12.218 20.0403 12.9187C19.5465 13.6127 18.8591 14.25 17.9783 14.8306C17.4377 15.1842 17.014 15.4979 16.707 15.7715C16.4067 16.0384 16.1899 16.3153 16.0564 16.6023C15.9296 16.8892 15.8562 17.2362 15.8362 17.6433C15.8362 17.69 15.8362 17.7401 15.8362 17.7935C15.8362 17.8468 15.8362 17.9002 15.8362 17.9536C15.8095 18.2939 15.696 18.5742 15.4958 18.7944C15.2957 19.008 15.0054 19.1147 14.625 19.1147ZM14.645 24.6902C14.3381 24.6902 14.0611 24.6168 13.8142 24.47C13.5673 24.3232 13.3704 24.1263 13.2236 23.8794C13.0768 23.6392 13.0034 23.3689 13.0034 23.0686C13.0034 22.775 13.0768 22.5047 13.2236 22.2578C13.3704 22.0109 13.5673 21.8174 13.8142 21.6772C14.0611 21.5304 14.3381 21.457 14.645 21.457C14.9453 21.457 15.2189 21.5304 15.4658 21.6772C15.7194 21.8174 15.9196 22.0109 16.0664 22.2578C16.2199 22.5047 16.2966 22.775 16.2966 23.0686C16.2966 23.3689 16.2199 23.6392 16.0664 23.8794C15.9196 24.1263 15.7194 24.3232 15.4658 24.47C15.2189 24.6168 14.9453 24.6902 14.645 24.6902Z"/>
+                        </svg>                       
+                        <div class="text4">FAQ</div>
+                        <svg class="icon2_4" width="7" height="12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 5 5-5 5"></path>
+                        </svg>
+                    </a>
+                </section>
+            </section>
+        </section>
+        <section class="_Profile_container_4">
+            <section class="_Profile_button_4_4_all">
+                <section class="_Profile_button_4_1">
+                    <div class="rectangle8">
+                        <svg class="icon1_5" width="120" height="68" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="diagonalGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#0039d7" />
+                                <stop offset="25%" stop-color="#3a6bf1" />
+                                <stop offset="50%" stop-color="#5683ff" />
+                                <stop offset="75%" stop-color="#3a6bf1" />
+                                <stop offset="100%" stop-color="#0039d7" />
+                                </linearGradient>
+                            </defs>
+                            <rect x="0" y="0" width="120" height="68" rx="8" ry="8" fill="url(#diagonalGradient)" />
+                            <svg x="42" y="16" width="36" height="36" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <g transform="translate(12, 12)">
+                                <path 
+                                  d="M0-10C-5.52-10-10-5.52-10 0C-10 5.52-5.52 10 0 10C5.52 10 10 5.52 10 0C10-5.52 5.52-10 0-10ZM2.66 1.73L1.38 2.47L0.1 3.21C-1.45 4.16-2.9 3.38-2.9 1.48V0V-1.48C-2.9-3.39-1.45-4.16 0.1-3.21L1.38-2.47L2.66-1.73C4.31-0.78 4.31 0.78 2.66 1.73Z" 
+                                  fill="#ffffff">
+                                  <animateTransform 
+                                    attributeName="transform" 
+                                    type="scale" 
+                                    begin="0s" 
+                                    dur="2s" 
+                                    values="1;1.1;1" 
+                                    repeatCount="indefinite" />
+                                </path>
+                              </g>
+                            </svg>
+                        </svg>                                 
+                        <div class="text5"><b>Трейлер канала</b><p><span class="dot">•</span> Ковчег</p></div>
+                        <svg class="icon2_5" width="7" height="12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 5 5-5 5"></path>
+                        </svg>
+                    </div>
+                </section>
+            </section>
+        </section>
+    </div>
+    <script>
+        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+            const mainButton = Telegram.WebApp.MainButton;
+            mainButton.text = "Попасть в канал";
+            mainButton.hasShineEffect = true;
+            mainButton.show();
+            mainButton.onClick(() => {
+                Telegram.WebApp.openLink('https://t.me/tribute');
+            });
+            document.addEventListener('visibilitychange', () => {
+                if (document.visibilityState === 'hidden') {
+                    mainButton.hide();
+                } else {
+                    mainButton.show();
+                }
+            });
+            window.addEventListener('beforeunload', () => {
+                mainButton.hide(); 
+            });
+        }
+    </script>     
+</body>
+</html>

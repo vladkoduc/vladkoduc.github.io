@@ -1,0 +1,45 @@
+.non-apple ._Profile_bar-not_button_1,
+.non-apple ._Profile_bar-not_button_2 {
+    display: flex;
+    align-items: center; 
+    background-color: var(--tg-theme-section-bg-color);
+    padding: 21px 18px 13px; 
+    margin: 12px 0; 
+    width: 100%; 
+    box-sizing: border-box; 
+    color: var(--tg-theme-text-color);
+    font-size: 19px;
+    font-weight: 600;
+}
+
+
+.apple ._Profile_bar-not_button_1 {
+    display: flex;
+    align-items: center; 
+    background-color: rgba(0,0,0,0.0);
+    padding: 0px 16px; 
+    margin-top: 9px; 
+    width: 100%; 
+    box-sizing: border-box; 
+    color: var(--tg-theme-text-color);
+    font-size: 21px;
+    font-weight: 700;
+}
+
+
+/* 2 var */
+
+
+.apple ._Profile_bar-not_button_2 {
+    display: flex;
+    align-items: center; 
+    background-color: rgba(0,0,0,0.0);
+    padding: 0px 16px; 
+    margin-top: 18px; 
+    width: 100%; 
+    box-sizing: border-box; 
+    color: var(--tg-theme-text-color);
+    font-size: 21px;
+    font-weight: 700;
+}
+

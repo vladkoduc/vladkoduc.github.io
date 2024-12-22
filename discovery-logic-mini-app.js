@@ -1,0 +1,1 @@
+document.addEventListener('DOMContentLoaded', () => {Telegram.WebApp.ready();Telegram.WebApp.expand();Telegram.WebApp.disableVerticalSwipes();function isAppleDevice() {return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;}window.isAppleDevice = isAppleDevice;});

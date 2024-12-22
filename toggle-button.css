@@ -1,0 +1,83 @@
+.apple .toggle-buttons {
+    position: relative;
+    display: flex;
+    background-color: var(--tg-theme-section-bg-color);
+    border-radius: 8px;
+    height: 31px;
+    width: calc(100% - 32px); 
+    margin-left: 14px;
+    overflow: hidden;
+    margin-top: 7px;
+}
+.apple .toggle-bg {
+    position: absolute;
+    top: 3px;
+    bottom: 3px;
+    left: 3px;
+    width: calc(50% - 4px); 
+    transition: transform 0.3s ease;
+    box-shadow: 0px 1px 2px #00000014;
+}
+.apple .toggle-bg::before {
+    content: ""; 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0; 
+    background-color: var(--tg-theme-hint-color);
+    opacity: .2;
+    border-radius: 6px; 
+  }
+.apple .toggle-btn {
+    flex: 1;
+    position: relative;
+    z-index: 1; 
+    background-color: transparent;
+    border: none;
+    padding: 5px 0;
+    color: var(--tg-theme-text-color);
+    font-size: 12px;
+    cursor: pointer;
+    text-align: center;
+    font-weight: 600;
+}
+.non-apple .tab-menu {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 0.5px solid var(--tg-theme-section-separator-color);
+    position: relative;
+    background-color: var(--tg-theme-section-bg-color); 
+}
+.non-apple .tab-item {
+    font-size: 14px;
+    color: var(--tg-theme-hint-color);
+    padding: 12px 0;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    flex: 1;
+    text-align: center;
+    position: relative;
+}
+.non-apple .tab-item.active {
+    color: var(--tg-theme-link-color);
+}
+.non-apple .indicator {
+    position: absolute;
+    bottom: 0;
+    height: 3px;
+    background-color: var(--tg-theme-link-color);
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    transition: all 0.3s ease;
+}
+.non-apple .toggle-buttons,
+.non-apple .toggle-bg,
+.non-apple .toggle-btn,
+.apple .tab-menu,
+.apple .tab-item,
+.apple .tab-item.active,
+.apple .indicator {
+    display: none; 
+}
