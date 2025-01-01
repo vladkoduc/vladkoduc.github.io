@@ -1,0 +1,1 @@
+document.addEventListener('DOMContentLoaded', () => {const user = Telegram.WebApp.initDataUnsafe.user;if (user && user.username) {document.getElementById('username').textContent = '@' + user.username;} else {document.getElementById('username').textContent = '@The username was not found';}});

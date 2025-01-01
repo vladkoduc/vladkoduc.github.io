@@ -1,0 +1,188 @@
+._Profile_bar_menu_button_3_1,
+._Profile_bar_menu_button_3_2,
+._Profile_bar_menu_button_3_3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: -5px; 
+    margin-bottom: -5px; 
+}
+
+._Profile_bar_menu_button_profile_1_3,
+._Profile_bar_menu_button_profile_2_3,
+._Profile_bar_menu_button_profile_3_3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #000;
+    position: relative;
+    cursor: default; 
+}
+
+._Profile_bar_menu_button_profile_1_3 span {
+    margin-top: 3px;
+    font-size: 10px;
+}
+
+._Profile_bar_menu_button_profile_2_3 span,
+._Profile_bar_menu_button_profile_3_3 span {
+    margin-top: -13px;
+    font-size: 10px;
+}
+
+._Profile_bar_menu_button_profile_2_3 svg,
+._Profile_bar_menu_button_profile_3_3 svg {
+    margin-top: -4px;
+    margin-left: 19px;
+}
+
+
+
+
+.apple ._Profile_bar_menu_button_profile_1_3,
+.apple ._Profile_bar_menu_button_profile_2_3,
+.apple ._Profile_bar_menu_button_profile_3_3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #000;
+    position: relative;
+    top: -8px;
+}
+
+.apple ._Profile_bar_menu_button_3_1,
+.apple ._Profile_bar_menu_button_3_2,
+.apple ._Profile_bar_menu_button_3_3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 1px; /* Отступ сверху */
+    margin-bottom: 12px; /* Отступ снизу */
+}
+
+
+
+
+
+._Profile_bar_menu_button_profile_1_3 span {
+    color: var(--tg-theme-link-color);
+}
+
+
+._Profile_bar_menu_button_profile_2_3 span,
+._Profile_bar_menu_button_profile_3_3 span {
+    color: var(--tg-theme-hint-color);
+}
+
+
+
+/* Медиа-запрос для ландшафтной ориентации */
+@media (orientation: landscape) {
+    ._Profile_bar_menu_button_3_1{
+        flex-direction: row; /* Изменяем направление на строку */
+        align-items: center; /* Выравнивание по центру */
+        justify-content: flex-start; /* Сдвигаем влево */
+    }
+
+    ._Profile_bar_menu_button_profile_1_3{
+        flex-direction: row; /* Изменяем направление на строку */
+        align-items: center; /* Выравнивание по центру */
+    }
+
+    ._Profile_bar_menu_button_profile_1_3 span{
+        margin-left: -2px; /* Отступ слева для текста */
+        margin-top: -10px; /* Убираем отступ сверху */
+    }
+
+    ._Profile_bar_menu_button_profile_1_3 svg{
+        margin-top: -12px; /* Убираем отступ сверху */
+        width: 39px;
+        height: 30px;
+    }
+
+    ._Profile_bar_menu_button_3_2,
+    ._Profile_bar_menu_button_3_3{
+        flex-direction: row; /* Изменяем направление на строку */
+        align-items: center; /* Выравнивание по центру */
+        justify-content: flex-start; /* Сдвигаем влево */
+    }
+
+    ._Profile_bar_menu_button_profile_2_3,
+    ._Profile_bar_menu_button_profile_3_3{
+        flex-direction: row; /* Изменяем направление на строку */
+        align-items: center; /* Выравнивание по центру */
+    }
+
+    ._Profile_bar_menu_button_profile_2_3 span,
+    ._Profile_bar_menu_button_profile_3_3 span{
+        margin-left: -15px; /* Отступ слева для текста */
+        margin-top: -10px; /* Убираем отступ сверху */
+    }
+    ._Profile_bar_menu_button_profile_2_3 svg,
+    ._Profile_bar_menu_button_profile_3_3 svg{
+        margin-top: 0px; /* Отступ слева для текста */
+        width: 46px;
+        height: 46px;
+    }
+
+
+
+
+
+
+
+
+    .apple ._Profile_bar_menu_button_3_1{
+        flex-direction: row; /* Изменяем направление на строку */
+        align-items: center; /* Выравнивание по центру */
+        justify-content: flex-start; /* Сдвигаем влево */
+        margin-bottom: -21px; /* Отступ снизу */
+    }
+
+    .apple ._Profile_bar_menu_button_profile_1_3{
+        flex-direction: row; /* Изменяем направление на строку */
+        align-items: center; /* Выравнивание по центру */
+    }
+
+    .apple ._Profile_bar_menu_button_profile_1_3 span{
+        margin-left: -2px; /* Отступ слева для текста */
+        margin-top: -16px; /* Убираем отступ сверху */
+    }
+
+
+    .apple ._Profile_bar_menu_button_profile_1_3 svg{
+        flex-direction: row; /* Изменяем направление на строку */
+        align-items: center; /* Выравнивание по центру */
+        margin-top: -20px;
+        width: 39px;
+        height: 30px;
+    }
+    
+    .apple ._Profile_bar_menu_button_3_2,
+    .apple ._Profile_bar_menu_button_3_3{
+        flex-direction: row; /* Изменяем направление на строку */
+        align-items: center; /* Выравнивание по центру */
+        justify-content: flex-start; /* Сдвигаем влево */
+        margin-bottom: -12px; /* Отступ снизу */
+    }
+
+    .apple ._Profile_bar_menu_button_profile_2_3,
+    .apple ._Profile_bar_menu_button_profile_3_3{
+        flex-direction: row; /* Изменяем направление на строку */
+        align-items: center; /* Выравнивание по центру */
+    }
+
+    .apple ._Profile_bar_menu_button_profile_2_3 span,
+    .apple ._Profile_bar_menu_button_profile_3_3 span{
+        margin-left: -15px; /* Отступ слева для текста */
+        margin-top: -8px; /* Убираем отступ сверху */
+    }
+    .apple ._Profile_bar_menu_button_profile_2_3 svg,
+    .apple ._Profile_bar_menu_button_profile_3_3 svg{
+        margin-top: 0px; /* Отступ слева для текста */
+        width: 46px;
+        height: 46px;
+    }
+}
