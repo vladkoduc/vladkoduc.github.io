@@ -1,0 +1,1 @@
+document.addEventListener('DOMContentLoaded', () => {const buttons = ['Profile_bar_menu_button_3_1','Profile_bar_menu_button_3_2','Profile_bar_menu_button_3_3'];buttons.forEach(buttonId => {const button = document.getElementById(buttonId);if (button) {button.addEventListener('click', () => {window.Telegram?.WebApp?.HapticFeedback?.impactOccurred('light');});}});}); 

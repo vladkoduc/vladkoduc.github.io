@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">  
+<head>      
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <title>Content | informatoin-Profile_3</title>
+    <script src="discovery-logic-mini-app.js"></script>
+    <script src="logic-style-bottom-top-background.js"></script>
+    <script src="dop-info.js"></script>
+    <script src="transition.js"></script>
+    <link rel="stylesheet" href="styles_text.css"> 
+    <link rel="stylesheet" href="dop-info.css"> 
+    <link rel="stylesheet" href="not-button-style-up.css"> 
+    <link rel="stylesheet" href="text-bar-not-button.css"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet"> 
+    <style> 
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--tg-theme-secondary-bg-color); 
+            color: var(--tg-theme-text-color);
+            display: flex;
+            flex-direction: column;
+            height: 100vh; 
+            overflow: hidden; 
+            user-select: none; 
+            -webkit-user-select: none; 
+            -ms-user-select: none; 
+        }
+        ::-webkit-scrollbar {
+            display: none; 
+        }
+        * {
+            pointer-events: auto; 
+        }
+        img, a, input, textarea {
+            pointer-events: auto; 
+        }
+        .content {
+            margin-top: 0px;
+            flex: 1; 
+            overflow-y: auto; 
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <section class="_Profile-dop-info-3_">
+            <section class="_Profile_bar-not_button_1">Личная консультация</section>
+            <section class="_Profile_not-button_1_1_up">
+                <div class="rectangle">
+                    <svg class="icon7" width="30px" height="30px" viewBox="0 0 56 56" fill="var(--tg-theme-text-color)" xmlns="http://www.w3.org/2000/svg">
+                        <g id="Layer_2" data-name="Layer 2">
+                          <g id="invisible_box" data-name="invisible box">
+                            <rect width="48" height="48" fill="none"/>
+                          </g>
+                          <g id="icons_Q2" data-name="icons Q2">
+                            <path d="M24,2A22,22,0,1,0,46,24,21.9,21.9,0,0,0,24,2Zm0,40A18,18,0,1,1,42,24,18.1,18.1,0,0,1,24,42Z"/>
+                            <path d="M24,20a2,2,0,0,0-2,2V34a2,2,0,0,0,4,0V22A2,2,0,0,0,24,20Z"/>
+                            <circle cx="24" cy="14" r="2"/>
+                          </g>
+                        </g>
+                      </svg>                      
+                    <div class="text2">У вас нет консультаций</div>
+                </div>
+            </section>
+            <div class="subscription-approved2">Что бы приобрести личную консультацию, нажмите на кнопку ниже «Приобрести консультацию».</div>
+        </section>
+    </div>
+    <script>
+        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+            const mainButton = Telegram.WebApp.MainButton;
+            mainButton.text = "Приобрести консультацию";
+            mainButton.hasShineEffect = true;
+            mainButton.setParams({
+                color: "#ffcc00",
+                text_color: "#fff"
+            });
+            mainButton.show();
+            mainButton.onClick(() => {
+                Telegram.WebApp.openLink('https://t.me/tribute');
+            });
+            document.addEventListener('visibilitychange', () => {
+                if (document.visibilityState === 'hidden') {
+                    mainButton.hide();
+                } else {
+                    mainButton.show();
+                }
+            });
+            window.addEventListener('beforeunload', () => {
+                mainButton.hide(); 
+            });
+        }
+    </script>         
+</body>
+</html>

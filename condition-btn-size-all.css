@@ -1,0 +1,593 @@
+.non-apple .rectangle2 {
+    display: flex;
+    align-items: center; 
+    background-color: var(--tg-theme-section-bg-color);
+    padding: 10px 18px; 
+    margin-top: -12px; 
+    width: 100%; 
+    box-sizing: border-box; 
+    position: relative; 
+    overflow: hidden; 
+}
+.non-apple .rectangle2 .icon1_2,
+.non-apple .rectangle12 .icon1_2 {
+    margin-right: 18px;
+    z-index: 1; 
+}
+.non-apple .rectangle2 .icon2_2,
+.non-apple .rectangle12 .icon2_2 {
+    margin-left: auto; 
+    color: var(--tg-theme-hint-color);
+    opacity: .6;
+    z-index: 1; 
+}
+.non-apple .text2 {
+    z-index: 1; 
+}
+.non-apple .rectangle12 {
+    display: flex;
+    align-items: center; 
+    background-color: var(--tg-theme-section-bg-color);
+    padding: 10px 18px; 
+    margin-top: 12px; 
+    width: 100%; 
+    box-sizing: border-box; 
+    position: relative; 
+}
+
+
+
+
+.non-apple .rectangle11 {
+    display: flex;
+    align-items: center; 
+    background-color: var(--tg-theme-section-bg-color);
+    padding: 10px 18px; 
+    margin-top: 12px; 
+    width: 100%; 
+    box-sizing: border-box; 
+    position: relative; 
+    box-shadow: 0px 1px 2px #00000014;
+    overflow: hidden; 
+}
+.non-apple .rectangle11 .icon1_2 {
+    margin-right: 18px; 
+    z-index: 1; 
+}
+.non-apple .rectangle11 .icon2_2 {
+    margin-left: auto; 
+    color: var(--tg-theme-hint-color);
+    opacity: .6;
+    z-index: 1; 
+}
+
+
+.apple .rectangle11 {
+    display: flex;
+    align-items: center;
+    background-color: var(--tg-theme-section-bg-color);
+    padding: 8px 19px;
+    margin-top: -7px; 
+    margin-left: 16px;
+    width: calc(100% - 32px); 
+    box-sizing: border-box;
+    border-radius: 12px;
+    position: relative; 
+    margin-bottom: 26px;
+}
+.apple .rectangle11 .icon1_2 {
+    margin-right: 19px; 
+}
+.apple .rectangle11 .icon2_2 {
+    margin-left: auto;
+    color: var(--tg-theme-hint-color);
+    opacity: .4;
+}
+
+
+
+/* --------------------------------------------------- */
+
+/* APPLE */
+
+
+.apple .rectangle2 {
+    display: flex;
+    align-items: center;
+    background-color: var(--tg-theme-section-bg-color);
+    padding: 8px 19px;
+    margin-top: 9px; /* Отступ сверху */
+    margin-left: 16px;
+    width: calc(100% - 32px); 
+    box-sizing: border-box;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    position: relative; 
+}
+.apple .rectangle2 .icon1_2,
+.apple .rectangle12 .icon1_2 {
+    margin-right: 19px; 
+}
+.apple .rectangle2 .icon2_2,
+.apple .rectangle12 .icon2_2 {
+    margin-left: auto; 
+    color: var(--tg-theme-hint-color);
+    opacity: .4;
+}
+.apple .text2 {
+    font-size: 16px; 
+    color: var(--tg-theme-text-color); 
+}
+.non-apple .text13,
+.apple .text13 {
+    margin-top: -5px;
+    font-size: 14px; 
+    color: var(--tg-theme-text-color); 
+}
+.apple .text13 {
+    margin-bottom: 1px;
+}
+.apple .rectangle12 {
+    display: flex;
+    align-items: center;
+    background-color: var(--tg-theme-section-bg-color);
+    padding: 8px 19px;
+    margin-top: 10px; 
+    margin-left: 16px;
+    width: calc(100% - 32px); 
+    box-sizing: border-box;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    position: relative; 
+}
+
+
+/* 2 var */
+
+
+.non-apple .rectangle3,
+.non-apple .rectangle13 {
+    display: flex;
+    align-items: center; 
+    background-color: var(--tg-theme-section-bg-color);
+    padding: 10px 18px; 
+    margin-top: 0px; /* Отступ сверху */
+    width: 100%; 
+    box-sizing: border-box; 
+    position: relative; /* Для позиционирования псевдоэлемента */
+    overflow: hidden; 
+}
+.non-apple .rectangle3 .icon1_3,
+.non-apple .rectangle13 .icon1_3 {
+    margin-right: 18px; 
+    z-index: 1; 
+}
+.non-apple .rectangle3 .icon2_3,
+.non-apple .rectangle13 .icon2_3 {
+    margin-left: auto; 
+    color: var(--tg-theme-hint-color);
+    opacity: .6;
+    z-index: 1; 
+}
+.non-apple .text3 {
+    z-index: 1;
+    font-size: 16px; 
+    color: var(--tg-theme-text-color); 
+    font-weight: 400;
+}
+
+
+
+/* --------------------------------------------------- */
+
+/* APPLE */
+
+
+.apple .rectangle3,
+.apple .rectangle13 {
+    display: flex;
+    align-items: center;
+    background-color: var(--tg-theme-section-bg-color);
+    padding: 8px 19px;
+    margin: 0px auto; /* Отступ сверху */
+    width: calc(100% - 32px); 
+    box-sizing: border-box;
+    position: relative; /* Для позиционирования псевдоэлемента */
+}
+.apple .rectangle3 .icon1_3,
+.apple .rectangle13 .icon1_3 {
+    margin-right: 19px; 
+}
+.apple .rectangle3 .icon2_3,
+.apple .rectangle13 .icon2_3 {
+    margin-left: auto; 
+    color: var(--tg-theme-hint-color);
+    opacity: .4;
+}
+.apple .text3 {
+    font-size: 16px; 
+    color: var(--tg-theme-text-color); 
+}
+
+/* 3 var */
+
+
+.non-apple .rectangle4,
+.non-apple .rectangle14 {
+    display: flex;
+    align-items: center; 
+    background-color: var(--tg-theme-section-bg-color);
+    padding: 10px 18px; 
+    margin-top: 0px; /* Отступ сверху */
+    width: 100%; 
+    box-sizing: border-box; 
+    box-shadow: 0px 1px 2px #00000014;
+    justify-content: space-between; /* Разделяем элементы основного контейнера */
+    overflow: hidden; 
+    position: relative;
+}
+.non-apple .rectangle4 .icon1_4,
+.non-apple .rectangle14 .icon1_4 {
+    margin-right: 18px; 
+    z-index: 1; 
+}
+.non-apple .rectangle4 .icon2_4,
+.non-apple .rectangle14 .icon2_4 {
+    margin-left: auto; 
+    color: var(--tg-theme-hint-color);
+    opacity: .6;
+    z-index: 1; 
+}
+.non-apple .text4 {
+    z-index: 1;
+    font-size: 16px; 
+    color: var(--tg-theme-text-color); 
+    font-weight: 400;
+}
+
+
+
+/* --------------------------------------------------- */
+
+/* APPLE */
+
+
+.apple .rectangle4,
+.apple .rectangle14 {
+    display: flex;
+    align-items: center;
+    background-color: var(--tg-theme-section-bg-color);
+    padding: 8px 19px;
+    margin: 0px auto; /* Отступ сверху */
+    width: calc(100% - 32px); 
+    box-sizing: border-box;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    justify-content: space-between; /* Разделяем элементы основного контейнера */
+    -webkit-tap-highlight-color: transparent;
+}
+.apple .rectangle4 .icon1_4,
+.apple .rectangle14 .icon1_4 {
+    margin-right: 19px; 
+}
+.apple .rectangle4 .icon2_4,
+.apple .rectangle14 .icon2_4 {
+    margin-left: auto; 
+    color: var(--tg-theme-hint-color);
+    opacity: .4;
+}
+.apple .text4 {
+    font-size: 16px; 
+    color: var(--tg-theme-text-color); 
+}
+
+
+
+
+/* 4 var */
+
+.non-apple .rectangle5 {
+    display: flex;
+    align-items: center; 
+    background-color: var(--tg-theme-section-bg-color);
+    padding: 10px 18px; 
+    margin-top: 12px; /* Отступ сверху */
+    width: 100%; 
+    box-sizing: border-box; 
+    position: relative; /* Для позиционирования псевдоэлемента */
+    overflow: hidden; 
+}
+.non-apple .rectangle5 .icon1_5 {
+    margin-right: 18px; 
+    z-index: 1; 
+}
+.non-apple .rectangle5 .icon2_5 {
+    margin-left: auto; 
+    color: var(--tg-theme-hint-color);
+    opacity: .6;
+    z-index: 1; 
+}
+.non-apple .text5 {
+    font-size: 16px; 
+    color: var(--tg-theme-text-color); 
+    font-weight: 400;
+    font-family: "Rubik", serif;
+    z-index: 1;
+}
+.non-apple .text5 b {
+    font-weight: 500;
+    font-family: "Rubik", serif;
+}
+
+
+/* --------------------------------------------------- */
+
+/* APPLE */
+
+.apple .rectangle5 {
+    display: flex;
+    align-items: center;
+    background-color: var(--tg-theme-section-bg-color);
+    padding: 8px 19px;
+    margin-top: 26px; /* Отступ сверху */
+    margin-left: 16px;
+    width: calc(100% - 32px); 
+    box-sizing: border-box;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    position: relative; /* Для позиционирования псевдоэлемента */
+}
+.apple .rectangle5 .icon1_5 {
+    margin-right: 19px; 
+}
+.apple .rectangle5 .icon2_5 {
+    margin-left: auto; 
+    color: var(--tg-theme-hint-color);
+    opacity: .4;
+}
+.apple .text5 {
+    font-size: 16px; 
+    color: var(--tg-theme-text-color); 
+}
+
+.text5 {
+    margin-top: 18px;
+}
+.text5 p {
+    margin-top: -2px;
+    font-size: 14px;
+    color: var(--tg-theme-subtitle-text-color); 
+}
+.dot {
+    font-size: 21px;
+    color: var(--tg-theme-link-color);
+    position: relative; 
+    top: -1px; 
+    vertical-align: middle; 
+}
+
+.text-container {
+    display: flex;
+    align-items: center; 
+    margin-right: auto; 
+}
+
+.info-icon-wrapper {
+    display: flex; 
+    align-items: center; 
+    gap: 9px; 
+}
+
+.non-apple .text-dop-info {
+    z-index: 1;
+    color: var(--tg-theme-subtitle-text-color);
+    margin: 0; 
+    font-size: 18px;
+}
+.apple .text-dop-info {
+    color: var(--tg-theme-subtitle-text-color);
+    margin: 0; 
+    font-size: 18px;
+}
+
+.icon2_4 {
+    margin: 0; 
+}
+
+.non-apple .rectangle7, 
+.non-apple .rectangle8 {
+    display: flex;
+    align-items: center; 
+    background-color: var(--tg-theme-section-bg-color);
+    padding: 10px 18px; 
+    margin-top: 12px; /* Отступ сверху */
+    width: 100%; 
+    box-sizing: border-box; 
+    position: relative; /* Для позиционирования псевдоэлемента */
+    box-shadow: 0px 1px 2px #00000014;
+    overflow: hidden; 
+}
+.non-apple .rectangle7 .icon1_5,
+.non-apple .rectangle8 .icon1_5 {
+    margin-right: 18px; 
+    z-index: 1;
+}
+.non-apple .rectangle7 .icon2_5,
+.non-apple .rectangle8 .icon2_5 {
+    margin-left: auto; 
+    color: var(--tg-theme-hint-color);
+    opacity: .6;
+    z-index: 1;
+}
+.non-apple .rectangle8 {
+    margin-bottom: 12px;
+}
+
+
+/* --------------------------------------------------- */
+
+/* APPLE */
+
+.apple .rectangle7 {
+    display: flex;
+    align-items: center;
+    background-color: var(--tg-theme-section-bg-color);
+    padding: 8px 19px;
+    margin-top: 21px; /* Отступ сверху */
+    margin-left: 16px;
+    width: calc(100% - 32px); 
+    box-sizing: border-box;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    position: relative; /* Для позиционирования псевдоэлемента */
+}
+.apple .rectangle7 .icon1_5 {
+    margin-right: 19px; 
+}
+.apple .rectangle7 .icon2_5 {
+    margin-left: auto; 
+    color: var(--tg-theme-hint-color);
+    opacity: .4;
+}
+
+.text12 {
+    margin-top: 3px;
+    font-weight: 100;
+    font-size: 12px;
+    color: var(--tg-theme-hint-color);
+}
+
+.apple .rectangle8 {
+    display: flex;
+    align-items: center;
+    background-color: var(--tg-theme-section-bg-color);
+    padding: 8px 19px;
+    margin-top: 26px; 
+    margin-left: 16px;
+    width: calc(100% - 32px); 
+    box-sizing: border-box;
+    border-radius: 12px;
+    position: relative; 
+}
+.apple .rectangle8 .icon1_5 {
+    margin-right: 19px; 
+}
+.apple .rectangle8 .icon2_5 {
+    margin-left: auto; 
+    color: var(--tg-theme-hint-color);
+    opacity: .4;
+}
+.rectangle9 {
+    position: relative; 
+    display: flex;
+    align-items: center;
+    padding: 16px 19px;
+    margin: 26px auto; 
+    width: calc(100% - 32px); 
+    box-sizing: border-box;
+    border-radius: 12px;
+    font-size: 21px;
+    justify-content: center;
+    font-weight: 600;
+    color: var(--tg-theme-link-color); 
+    overflow: hidden; 
+}
+.rectangle9::before {
+    content: "";
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0; 
+    background-color: var(--tg-theme-link-color); 
+    opacity: 0.2;
+    border-radius: 12px; 
+    z-index: -1;
+}
+.non-apple .info-video,
+.non-apple .dop-info-video {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--tg-theme-section-bg-color);
+    width: 100%;
+    box-sizing: border-box;
+    position: relative; 
+    overflow: hidden;
+    padding: 8px 0px 0px 0px; 
+}
+.non-apple .info-video,
+.non-apple .dop-info-video {
+    box-shadow: 0px 1px 2px #00000014;
+}
+.non-apple .dop-info-video {
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+.apple .dop-info-video {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--tg-theme-secondary-bg-color);
+    width: 100%; 
+    box-sizing: border-box;
+    position: relative; 
+    overflow: hidden;
+    padding: 8px 0px 8px 0px; 
+    margin-top: -12px;
+}
+
+/* shadow */
+.non-apple .rectangle2::after,
+.non-apple .rectangle3::after,
+.non-apple .rectangle5::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 67px; 
+    right: 0px; 
+    height: 0.5px; 
+    background-color: var(--tg-theme-hint-color); 
+    opacity: .2;
+}
+.non-apple .rectangle13::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 101px; 
+    right: 0px; 
+    height: 0.5px; 
+    background-color: var(--tg-theme-hint-color); 
+    opacity: .2;
+}
+.apple .rectangle2::after,
+.apple .rectangle3::after,
+.apple .rectangle5::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 69px; 
+    right: 0px; 
+    height: 0.5px; 
+    background-color: var(--tg-theme-hint-color); 
+    opacity: .1;
+}
+.apple .rectangle13::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 103px; 
+    right: 0px; 
+    height: 0.5px; 
+    background-color: var(--tg-theme-hint-color); 
+    opacity: .1;
+}
+@media (orientation: landscape) {
+    .apple .info-video,
+    .apple .dop-info-video {
+        width: calc(100% - 46px); 
+        margin-left: 23px;
+    }
+    .apple .rectangle11 {
+        width: calc(100% - 78px);
+        margin-left: 39px;
+    }
+}

@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <title>Videoplayer</title>
+    <script src="discovery-logic-mini-app.js"></script>
+    <script src="logic-device-videoplayer.js"></script>
+    <script src="episode-animation.js"></script>
+    <script src="fullscreen.js"></script>
+    <script src="time-video-script.js"></script>
+    <script src="button-boost-videoplayer.js"></script>
+    <link rel="stylesheet" href="styles_text.css"> 
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            height: 100vh;
+            background-color: #000000;
+            user-select: none; 
+            overflow: hidden;  
+        }
+        ::-webkit-scrollbar {
+            display: none; 
+        }
+        * {
+            pointer-events: auto; 
+        }
+        img, a, input, textarea {
+            pointer-events: auto; 
+        }
+        .android .Videoplayer-container,
+        .non-apple .Videoplayer-container {
+            width: calc(100% - 976px); 
+            background-color: #17212bc1;
+            border-radius: 8px 8px 0px 0px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 12px 46px 12px; 
+            box-sizing: border-box;
+            position: relative;
+            text-decoration: none; 
+            cursor: default; 
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+        .android .Videoplayer-container {
+            width: 100%;
+            border-radius: 0px;
+        }
+        .icons-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+            gap: 26px; 
+            margin-left: -21px;
+        }
+        .android .icons-container {
+            gap: 36px;
+        }
+        .left-edge-icons,
+        .right-edge-icons {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-right: auto;
+        }
+        .boost-button {
+            display: inline-flex;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 30px;
+        }
+        .boost-button span {
+            font-size: 18px;
+            font-family: 'Visby Round CF', sans-serif;
+            color: #727e8a;
+            position: absolute;
+            transition: transform 0.4s ease, opacity 0.4s ease, font-size 0.4s ease;
+        }
+        .boost-button span.hidden {
+            transform: scale(0.6);
+            opacity: 0;
+        }
+        .boost-button span.active {
+            transform: scale(1);
+            opacity: 1;
+        }
+        .boost-button span.active {
+            font-size: 18px;
+            opacity: 1;
+        }
+        @font-face {
+            font-family: 'Visby Round CF';
+            src: local('Visby Round CF Extra Bold'), local('Visby-Round-CF-Extra-Bold'),
+                url('VisbyRoundCF-ExtraBold.ttf') format('truetype');
+            font-weight: 800;
+            font-style: normal;
+        }
+        .rewind-video {
+            width: 56px;
+            height: 4px;
+            background-color: #090f15;
+            border-radius: 6px;
+            margin-left: -12px;
+        }
+        .rewind-video,
+        .right-edge-icons {
+            margin-top: -1px;
+        }
+        .exit-full-screen-btn svg,
+        .miniplayer-btn svg {
+            margin-top: 8px;
+        }
+        .android .miniplayer-btn {
+            display: none;
+        }
+        .bottom-line {
+            position: absolute;
+            bottom: 21px;
+            left: calc(21px + 50px); 
+            right: calc(21px + 50px); 
+            border-radius: 6px;
+            height: 4px;
+            background-color: #090f15;
+        }
+        .android .bottom-line {
+            bottom: 26px;
+        }
+        .time-left {
+            position: absolute;
+            bottom: 16px;
+            left: 12px;
+            font-size: 14px;
+            color: #727e8a;
+            font-family: 'Visby Round CF', sans-serif;
+        }
+        .time-right {
+            right: 12px;
+            position: absolute;
+            bottom: 16px;
+            font-size: 14px;
+            color: #727e8a;
+            font-family: 'Visby Round CF', sans-serif;
+        }
+        .android .time-left,
+        .android .time-right {
+            bottom: 21px;
+        }
+        .episodes-btn-click {
+            width: 256px;
+            height: 156px; 
+            background-color: #17212bc1;
+            position: absolute;
+            top: -186px;
+            left: -86px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-y: auto; 
+            overflow-x: hidden; 
+            padding-bottom: 12px;
+        }
+        .android .episodes-btn-click {
+            height: 276px;
+            top: -305px;
+            left: 16px;
+        }
+        .episodes-menu {
+            width: 100%;
+            height: 21px;
+            background-color: #2d4052c1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            font-weight: 800;
+            color: #727e8a;
+            border-radius: 8px 8px 0 0;
+            font-family: 'Visby Round CF', sans-serif;
+        }
+        .episodes-content {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            margin-top: 2px;
+            margin-left: 16px;
+            cursor: pointer;
+        }
+        .episodes-rectangle {
+            width: 65px;
+            height: 38px;
+            background-color: #7d88ebc7;
+            border-radius: 6px;
+            margin-right: 4px;
+            margin-top: 6px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .episodes-text {
+            display: flex;
+            flex-direction: column;
+            font-size: 14px;
+            color: #727e8a;
+            margin-top: 6px;
+            margin-left: 6px;
+            font-weight: 600;
+        }
+        .episodes-text span {
+            margin-bottom: -3px;
+        }
+        .episodes-time {
+            background-color: #3f89f738;
+            border-radius: 4px;
+            padding: 2px 4px; 
+            font-size: 12px;
+            font-weight: 800;
+            font-family: 'Visby Round CF', sans-serif;
+            color: #3f88f7;
+            display: inline-block;
+            margin-top: 8px;
+            text-align: center;
+            width: fit-content; 
+        }
+        .episodes-btn-click {
+            opacity: 0;
+            transform: scale(0.5); 
+            visibility: hidden;
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+        }
+        .episodes-btn-click.show {
+            opacity: 1;
+            transform: scale(1); 
+            visibility: visible;
+        }
+        .non-apple .exit-full-screen-btn-mobile,
+        .android .exit-full-screen-btn,
+        .android .rewind-video {
+            display: none;
+        }
+        .android .volume-btn svg {
+            fill: transparent;
+        }
+        .android .exit-full-screen-btn-mobile {
+            margin-bottom: -16px;
+            margin-right: -10px;
+        }
+        .episodes-btn,
+        .volume-btn,
+        .second-left-btn,
+        .play-pause-btn,
+        .second-right-btn,
+        .miniplayer-btn,
+        .exit-full-screen-btn {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="Videoplayer-container">
+        <div class="episodes-btn-click">
+            <div class="episodes-menu">Video segments</div>
+            <div class="episodes-content">
+                <div class="episodes-rectangle">
+                    <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM14.66 13.73L13.38 14.47L12.1 15.21C10.45 16.16 9.1 15.38 9.1 13.48V12V10.52C9.1 8.61 10.45 7.84 12.1 8.79L13.38 9.53L14.66 10.27C16.31 11.22 16.31 12.78 14.66 13.73Z" fill="#b2baff"/>
+                    </svg>
+                </div>
+                <div class="episodes-text">
+                    <span>Тест Таймкод</span>
+                    <div class="episodes-time">00:01</div>
+                </div>
+            </div>
+            <div class="episodes-content">
+                <div class="episodes-rectangle">
+                    <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM14.66 13.73L13.38 14.47L12.1 15.21C10.45 16.16 9.1 15.38 9.1 13.48V12V10.52C9.1 8.61 10.45 7.84 12.1 8.79L13.38 9.53L14.66 10.27C16.31 11.22 16.31 12.78 14.66 13.73Z" fill="#b2baff"/>
+                    </svg>
+                </div>
+                <div class="episodes-text">
+                    <span>Тест Таймкод</span>
+                    <div class="episodes-time">00:01</div>
+                </div>
+            </div>
+            <div class="episodes-content">
+                <div class="episodes-rectangle">
+                    <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM14.66 13.73L13.38 14.47L12.1 15.21C10.45 16.16 9.1 15.38 9.1 13.48V12V10.52C9.1 8.61 10.45 7.84 12.1 8.79L13.38 9.53L14.66 10.27C16.31 11.22 16.31 12.78 14.66 13.73Z" fill="#b2baff"/>
+                    </svg>
+                </div>                
+                <div class="episodes-text">
+                    <span>Тест Таймкод</span>
+                    <div class="episodes-time">00:01</div>
+                </div>
+            </div>
+            <div class="episodes-content">
+                <div class="episodes-rectangle">
+                    <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM14.66 13.73L13.38 14.47L12.1 15.21C10.45 16.16 9.1 15.38 9.1 13.48V12V10.52C9.1 8.61 10.45 7.84 12.1 8.79L13.38 9.53L14.66 10.27C16.31 11.22 16.31 12.78 14.66 13.73Z" fill="#b2baff"/>
+                    </svg>
+                </div>                
+                <div class="episodes-text">
+                    <span>Тест Таймкод</span>
+                    <div class="episodes-time">00:01</div>
+                </div>
+            </div>
+            <div class="episodes-content">
+                <div class="episodes-rectangle">
+                    <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM14.66 13.73L13.38 14.47L12.1 15.21C10.45 16.16 9.1 15.38 9.1 13.48V12V10.52C9.1 8.61 10.45 7.84 12.1 8.79L13.38 9.53L14.66 10.27C16.31 11.22 16.31 12.78 14.66 13.73Z" fill="#b2baff"/>
+                    </svg>
+                </div>                
+                <div class="episodes-text">
+                    <span>Тест Таймкод</span>
+                    <div class="episodes-time">00:01</div>
+                </div>
+            </div>
+            <div class="episodes-content">
+                <div class="episodes-rectangle">
+                    <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM14.66 13.73L13.38 14.47L12.1 15.21C10.45 16.16 9.1 15.38 9.1 13.48V12V10.52C9.1 8.61 10.45 7.84 12.1 8.79L13.38 9.53L14.66 10.27C16.31 11.22 16.31 12.78 14.66 13.73Z" fill="#b2baff"/>
+                    </svg>
+                </div>                
+                <div class="episodes-text">
+                    <span>Тест Таймкод</span>
+                    <div class="episodes-time">00:01</div>
+                </div>
+            </div>
+        </div>
+        <div class="left-edge-icons">
+            <!-- New Left Edge SVG Icon -->
+            <div class="episodes-btn">
+                <svg width="21px" height="21px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z" stroke="#727e8a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6.88989 2.52002V21.48" stroke="#727e8a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M16.8899 2.52002V21.48" stroke="#727e8a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6.89004 6.96997H2.54004" stroke="#727e8a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6.89003 12H2.03003" stroke="#727e8a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6.88998 16.97H2.47998" stroke="#727e8a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M21.89 6.96997H17.54" stroke="#727e8a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M21.89 12H17.03" stroke="#727e8a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M16.97 12H5.96997" stroke="#727e8a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M21.89 16.97H17.48" stroke="#727e8a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="volume-btn">
+                <!-- Additional Left Edge SVG Icon -->
+                <svg fill="#727e8a" width="26px" height="26px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M264,416.19a23.92,23.92,0,0,1-14.21-4.69l-.66-.51-91.46-75H88a24,24,0,0,1-24-24V200a24,24,0,0,1,24-24h69.65l91.46-75,.66-.51A24,24,0,0,1,288,119.83V392.17a24,24,0,0,1-24,24Z"/>
+                    <path d="M352,336a16,16,0,0,1-14.29-23.18c9.49-18.9,14.3-38,14.3-56.82,0-19.36-4.66-37.92-14.25-56.73a16,16,0,0,1,28.5-14.54C378.2,208.16,384,231.47,384,256c0,23.83-6,47.78-17.7,71.18A16,16,0,0,1,352,336Z"/>
+                    <path d="M400,384a16,16,0,0,1-13.87-24C405,327.05,416,299.45,416,256c0-44.12-10.94-71.52-29.83-103.95A16,16,0,0,1,413.83,136C434.92,172.16,448,204.88,448,256c0,50.36-13.06,83.24-34.12,120A16,16,0,0,1,400,384Z"/>
+                </svg>
+            </div>
+            <!-- Additional Left Edge Div Icon -->
+            <div class="rewind-video"></div>
+        </div>
+        <div class="icons-container">
+            <div class="second-left-btn">
+                <!-- Left SVG Icon -->
+                <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g transform="scale(-1, 1) translate(-24, 0)">
+                        <path d="M13.98 4.46997L12 2" stroke="#727e8a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M13.98 4.46997L12 2" stroke="#727e8a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" transform="rotate(180 12 2) scale(-1, 1) translate(-24, -5)"/>
+                        <path d="M19.0894 7.79974C20.1994 9.27974 20.8894 11.1097 20.8894 13.1097C20.8894 18.0197 16.9094 21.9998 11.9994 21.9998C7.08939 21.9998 3.10938 18.0197 3.10938 13.1097C3.10938 8.19974 7.08939 4.21973 11.9994 4.21973C12.6794 4.21973 13.3394 4.30978 13.9794 4.45978" stroke="#727e8a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </g>
+                    <text x="12" y="17.5" font-size="12" text-anchor="middle" fill="#727e8a" font-family="Visby Round CF">15</text>
+                </svg>    
+            </div>        
+            <div class="play-pause-btn">
+                <!-- Middle SVG Icon -->
+                <svg width="28px" height="28px" viewBox="-3 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                        <g id="Icon-Set-Filled" sketch:type="MSLayerGroup" transform="translate(-419.000000, -571.000000)" fill="#727e8a">
+                            <path d="M440.415,583.554 L421.418,571.311 C420.291,570.704 419,570.767 419,572.946 L419,597.054 C419,599.046 420.385,599.36 421.418,598.689 L440.415,586.446 C441.197,585.647 441.197,584.353 440.415,583.554" id="play" sketch:type="MSShapeGroup"></path>
+                        </g>
+                    </g>
+                </svg>
+            </div>
+            <div class="second-right-btn">
+                <!-- Right SVG Icon -->
+                <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.98 4.46997L12 2" stroke="#727e8a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M13.98 4.46997L12 2" stroke="#727e8a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" transform="rotate(180 12 2) scale(-1, 1) translate(-24, -5)"/>
+                    <path d="M19.0894 7.79974C20.1994 9.27974 20.8894 11.1097 20.8894 13.1097C20.8894 18.0197 16.9094 21.9998 11.9994 21.9998C7.08939 21.9998 3.10938 18.0197 3.10938 13.1097C3.10938 8.19974 7.08939 4.21973 11.9994 4.21973C12.6794 4.21973 13.3394 4.30978 13.9794 4.45978" stroke="#727e8a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <text x="12" y="17.5" font-size="12" text-anchor="middle" fill="#727e8a" font-family="Visby Round CF">15</text>
+                </svg>   
+            </div>
+        </div>
+        <div class="right-edge-icons">
+            <!-- New Right Edge SVG Icon -->
+            <div class="miniplayer-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26" id="Miniplayer-Line--Streamline-Mingcute" height="26" width="26"><g fill="none" fill-rule="nonzero"><path d="M24 0v24H0V0h24ZM12.593 23.258l-0.011 0.002 -0.071 0.035 -0.02 0.004 -0.014 -0.004 -0.071 -0.035c-0.01 -0.004 -0.019 -0.001 -0.024 0.005l-0.004 0.01 -0.017 0.428 0.005 0.02 0.01 0.013 0.104 0.074 0.015 0.004 0.012 -0.004 0.104 -0.074 0.012 -0.016 0.004 -0.017 -0.017 -0.427c-0.002 -0.01 -0.009 -0.017 -0.017 -0.018Zm0.265 -0.113 -0.013 0.002 -0.185 0.093 -0.01 0.01 -0.003 0.011 0.018 0.43 0.005 0.012 0.008 0.007 0.201 0.093c0.012 0.004 0.023 0 0.029 -0.008l0.004 -0.014 -0.034 -0.614c-0.003 -0.012 -0.01 -0.02 -0.02 -0.022Zm-0.715 0.002a0.023 0.023 0 0 0 -0.027 0.006l-0.006 0.014 -0.034 0.614c0 0.012 0.007 0.02 0.017 0.024l0.015 -0.002 0.201 -0.093 0.01 -0.008 0.004 -0.011 0.017 -0.43 -0.003 -0.012 -0.01 -0.01 -0.184 -0.092Z" stroke-width="1"></path>
+                    <path fill="#727e8a" d="M20 12a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-5a2 2 0 0 1 -2 -2v-4a2 2 0 0 1 2 -2h5Zm-1 -8a2 2 0 0 1 2 2v4a1 1 0 1 1 -2 0V6H4v11h7a1 1 0 1 1 0 2H4a2 2 0 0 1 -2 -2V6a2 2 0 0 1 2 -2h15Zm1 10h-5v4h5v-4ZM7.087 7.673l1.915 1.915v-0.586a1 1 0 1 1 2 0v3a1 1 0 0 1 -1 1h-3a1 1 0 1 1 0 -2h0.586L5.673 9.087a1 1 0 1 1 1.414 -1.414Z" stroke-width="1"></path>
+                </g></svg>
+            </div>
+            <!-- New Right Edge Text Icon -->
+            <div class="boost-button"> 
+                <span class="active">1x</span>
+                <span class="hidden">1.5x</span>
+                <span class="hidden">2x</span>
+                <span class="hidden">2.5x</span>
+                <span class="hidden">0.5x</span> 
+            </div>
+            <!-- Additional Right Edge SVG Icon -->
+            <div class="exit-full-screen-btn" onclick="navigateToPage('video-content.html')">
+                <svg width="21px" height="21px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">  
+                    <path fill="#727e8a" fill-rule="evenodd" d="M11 8a1 1 0 001 1h6a1 1 0 100-2h-3.586l3.793-3.793a1 1 0 00-1.414-1.414L13 5.586V2a1 1 0 10-2 0v6zm-2 4a1 1 0 00-1-1H2a1 1 0 100 2h3.586l-3.793 3.793a1 1 0 101.414 1.414L7 14.414V18a1 1 0 102 0v-6z"/>
+                </svg>
+            </div>
+            <div class="exit-full-screen-btn-mobile" onclick="navigateToPage('video-content.html')">
+                <svg width="34px" height="34px" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M5.5 2C5.77614 2 6 2.22386 6 2.5V5.5C6 5.77614 5.77614 6 5.5 6H2.5C2.22386 6 2 5.77614 2 5.5C2 5.22386 2.22386 5 2.5 5H5V2.5C5 2.22386 5.22386 2 5.5 2ZM9.5 2C9.77614 2 10 2.22386 10 2.5V5H12.5C12.7761 5 13 5.22386 13 5.5C13 5.77614 12.7761 6 12.5 6H9.5C9.22386 6 9 5.77614 9 5.5V2.5C9 2.22386 9.22386 2 9.5 2ZM2 9.5C2 9.22386 2.22386 9 2.5 9H5.5C5.77614 9 6 9.22386 6 9.5V12.5C6 12.7761 5.77614 13 5.5 13C5.22386 13 5 12.7761 5 12.5V10H2.5C2.22386 10 2 9.77614 2 9.5ZM9 9.5C9 9.22386 9.22386 9 9.5 9H12.5C12.7761 9 13 9.22386 13 9.5C13 9.77614 12.7761 10 12.5 10H10V12.5C10 12.7761 9.77614 13 9.5 13C9.22386 13 9 12.7761 9 12.5V9.5Z"
+                    fill="#727e8a"
+                    />
+                </svg>
+            </div>
+        </div>
+        <div class="bottom-button-line">
+            <span class="time-left">0:00</span>
+            <div class="bottom-line"></div>       
+            <span class="time-right">-0:06</span> 
+        </div>
+    </div>
+    <script>
+        document.addEventListener('keydown', (event) => {
+            if ((event.ctrlKey || event.metaKey) && (event.key === '+' || event.key === '-' || event.key === '=')) {
+                event.preventDefault();
+            }
+            if (event.key === 'F11') {
+                event.preventDefault();
+            }
+        });
+        window.addEventListener('wheel', (event) => {
+            if (event.ctrlKey) {
+                event.preventDefault();
+            }
+        }, { passive: false });
+        document.addEventListener('touchstart', (event) => {
+            if (event.touches.length > 1) {
+                event.preventDefault();
+            }
+        }, { passive: false });
+        document.addEventListener('gesturestart', (event) => {
+            event.preventDefault();
+        });
+        window.addEventListener("resize", () => {
+            if (window.innerHeight > window.innerWidth) {
+                document.documentElement.requestFullscreen().then(() => {
+                screen.orientation.lock("landscape");
+                }).catch(err => console.error("Error:", err));
+            }
+        });
+    </script>
+</body>
+</html>
