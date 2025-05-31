@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Exam Mini App</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      touch-action: pan-y; 
+      overscroll-behavior: none;
+      margin: 0;
+      min-height: 100vh;
+      overflow-y: auto;
+      scrollbar-width: none; 
+      -ms-overflow-style: none; 
+    }
+    body::-webkit-scrollbar {
+      display: none; 
+    }
+    #app {
+      width: 100%;
+    }
+    .question-text, .additional-text {
+      white-space: normal;
+      overflow-wrap: break-word;
+    }
+    .number-rectangle {
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body class="bg-white font-sans">
+  <div id="app" class="flex flex-col items-center p-4">
+    <div id="start-page" class="w-full text-center">
+      <h1 class="text-2xl font-bold mb-4">Нажми на кнопку, что бы начать экзамен</h1>
+      <button id="start-btn" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">Начать экзамен</button>
+    </div>
+    <div id="password-page" class="hidden w-full text-center">
+      <h1 class="text-2xl font-bold mb-4">Введите пароль</h1>
+      <input id="password-input" type="text" class="border p-2 mb-4 rounded" placeholder="Введите пароль">
+      <button id="submit-password" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">Начать</button>
+      <p id="error-message" class="text-red-500 mt-2 hidden">Пароль неверный</p>
+    </div>
+    <div id="success-page" class="hidden w-full">
+      <div id="questions-container"></div>
+      <button id="finish-btn" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 mt-4">Завершить экзамен</button>
+    </div>
+    <div id="results-page" class="hidden w-full text-center">
+      <h1 class="text-2xl font-bold mb-4">Результаты экзамена</h1>
+      <div id="results-container"></div>
+    </div>
+  </div>
+
+  <script>
+    const tg = window.Telegram.WebApp;
+    tg.ready();
+    tg.expand();
+    tg.isVerticalSwipesEnabled = false; 
+
+    document.addEventListener('contextmenu', (e) => e.preventDefault());
+    document.addEventListener('copy', (e) => e.preventDefault());
+    document.addEventListener('cut', (e) => e.preventDefault());
+
+    document.addEventListener('touchstart', (e) => {
+      if (e.touches.length > 1) e.preventDefault();
+    }, { passive: false });
+
+    document.addEventListener('touchstart', (e) => {
+      const passwordInput = document.getElementById('password-input');
+      const answerInputs = document.querySelectorAll('.answer-input');
+      if (e.target !== passwordInput && passwordInput === document.activeElement) {
+        passwordInput.blur(); 
+      }
+      answerInputs.forEach(input => {
+        if (e.target !== input && input === document.activeElement) {
+          input.blur(); 
+        }
+      });
+    });
+
+    const questions = [
+      {
+        number: 1,
+        questionText: "Ниже приведён перечень факторов. Все они, за исключением двух, относятся к факторам сокращения предложения.",
+        image: "photo_2025-05-31_10-29-45.jpg",
+        additionalText: ""
+      },
+      {
+        number: 2,
+        questionText: "Выберите верные суждения о познании и истине и запишите цифры, под которыми они указаны.",
+        image: "photo_2025-05-31_10-35-40.jpg",
+        additionalText: ""
+      },
+      {
+        number: 3,
+        questionText: "Установите соответствие между характеристиками и видами (типами) культуры: к каждой позиции, данной в первом столбце, подберите соответствующую позицию из второго столбца.",
+        image: "image1.png",
+        additionalText: ""
+      },
+      {
+        number: 4,
+        questionText: "В стране Z развиты сельское хозяйство и народные промыслы, основанные на ручном труде. Какие иные признаки из перечисленных свидетельствуют о том, что страна Z развивается как общество традиционного типа? Запишите цифры, под которыми они указаны.",
+        image: "image2.png",
+        additionalText: ""
+      },
+      {
+        number: 5,
+        questionText: "Выберите верные суждения о факторах производства и факторных доходах и запишите цифры, под которыми они указаны.",
+        image: "image3.png",
+        additionalText: ""
+      },
+      {
+        number: 6,
+        questionText: "Установите соответствие между примерами и видами налогов и сборов (согласно Налоговому кодексу Российской Федерации): к каждой позиции, данной в первом столбце, подберите соответствующую позицию из второго столбца",
+        image: "image4.png",
+        additionalText: ""
+      },
+      {
+        number: 7,
+        questionText: "Ателье специализируется на пошиве детской одежды. Найдите в приведённом списке примеры переменных издержек ателье в краткосрочном периоде. Запишите цифры, под которыми они указаны.",
+        image: "image5.png",
+        additionalText: ""
+      },
+      {
+        number: 8,
+        questionText: "Выберите верные суждения о социальных группах и запишите цифры, под которыми они указаны.",
+        image: "image6.png",
+        additionalText: ""
+      },
+      {
+        number: 9,
+        questionText: "В ходе социологических опросов совершеннолетних жителей им предложили определить их отношение к проблеме неравенства доходов. Полученные результаты (в % от числа опрошенных) представлены в виде диаграммы. ",
+        image: "image7.png",
+        additionalText: ""
+      },
+      {
+        number: 10,
+        questionText: "Выберите верные суждения о гражданском обществе и запишите цифры, под которыми они указаны.",
+        image: "image8.png",
+        additionalText: ""
+      },
+      {
+        number: 11,
+        questionText: "Организация Y – политическая партия. Какие функции она выполняет в демократическом обществе? Запишите цифры, под которыми они указаны.",
+        image: "image9.png",
+        additionalText: ""
+      },
+      {
+        number: 12,
+        questionText: "Согласно Конституции Российской Федерации наша страна – социальное государство. Выберите в приведённом списке черты, характеризующие социальное государство, и запишите цифры, под которыми они указаны.",
+        image: "image10.png",
+        additionalText: ""
+      },
+      {
+        number: 13,
+        questionText: "Установите соответствие между полномочиями и субъектами государственной власти Российской Федерации, реализующими эти полномочия: к каждой позиции, данной в первом столбце, подберите соответствующую позицию из второго столбца.",
+        image: "image11.png",
+        additionalText: ""
+      },
+      {
+        number: 14,
+        questionText: "Выберите верные суждения об особенностях правового регулирования труда несовершеннолетних в Российской Федерации. Запишите цифры, под которыми они указаны.",
+        image: "image12.png",
+        additionalText: ""
+      },
+      {
+        number: 15,
+        questionText: "Установите соответствие между характеристиками и источниками (формами) права: к каждой позиции, данной в первом столбце, подберите соответствующую позицию из второго столбца.",
+        image: "image13.png",
+        additionalText: ""
+      },
+      {
+        number: 16,
+        questionText: "Представьте, что Вы помогаете учителю оформить презентацию к уроку обществознания по теме «Меры процессуального принуждения, установленные Уголовно-процессуальным кодексом Российской Федерации». Один из слайдов называется «Меры пресечения». Что из перечисленного следует включить в этот слайд? Запишите цифры, под которыми указаны меры пресечения.",
+        image: "image14.png",
+        additionalText: ""
+      }
+    ];
+
+    function renderQuestions() {
+      questionsContainer.innerHTML = '';
+      questions.forEach((q, index) => {
+        const questionDiv = document.createElement('div');
+        questionDiv.className = 'mb-6';
+        questionDiv.innerHTML = `
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 border-2 border-black flex items-center justify-center mr-4 number-rectangle">
+              <span class="text-xl font-bold">${q.number}</span>
+            </div>
+            <p class="text-lg question-text">${q.questionText}</p>
+          </div>
+          ${q.image !== "None" ? `<img src="${q.image}" alt="Question Image" class="w-full max-w-md mb-4">` : ''}
+          <p class="mb-4 additional-text">${q.additionalText}</p>
+          ${q.number !== "*" ? `<input type="text" id="answer-input-${index}" class="answer-input border p-2 mb-4 w-full rounded" placeholder="Введите ответ">` : ''}
+          <hr class="border-t border-gray-400 w-full">
+        `;
+        questionsContainer.appendChild(questionDiv);
+      });
+    }
+
+    function renderResults(answers) {
+      const resultsContainer = document.getElementById('results-container');
+      resultsContainer.innerHTML = '';
+      answers.forEach((answer, index) => {
+        const resultDiv = document.createElement('div');
+        resultDiv.className = 'mb-2';
+        resultDiv.innerHTML = `<p>${questions[index].number}) ${answer || 'No answer provided'}</p>`;
+        resultsContainer.appendChild(resultDiv);
+      });
+    }
+
+    const startPage = document.getElementById('start-page');
+    const passwordPage = document.getElementById('password-page');
+    const successPage = document.getElementById('success-page');
+    const resultsPage = document.getElementById('results-page');
+    const questionsContainer = document.getElementById('questions-container');
+    const startBtn = document.getElementById('start-btn');
+    const submitPasswordBtn = document.getElementById('submit-password');
+    const finishBtn = document.getElementById('finish-btn');
+    const passwordInput = document.getElementById('password-input');
+    const errorMessage = document.getElementById('error-message');
+
+    startBtn.addEventListener('click', () => {
+      startPage.classList.add('hidden');
+      passwordPage.classList.remove('hidden');
+    });
+
+    submitPasswordBtn.addEventListener('click', () => {
+      const password = passwordInput.value;
+      if (password === '000248') {
+        passwordPage.classList.add('hidden');
+        successPage.classList.remove('hidden');
+        renderQuestions();
+      } else {
+        errorMessage.classList.remove('hidden');
+      }
+    });
+
+    finishBtn.addEventListener('click', () => {
+      const answers = questions.map((_, index) => {
+        const input = document.getElementById(`answer-input-${index}`);
+        return input ? input.value : '';
+      });
+      successPage.classList.add('hidden');
+      resultsPage.classList.remove('hidden');
+      renderResults(answers);
+    });
+  </script>
+</body>
+</html>
